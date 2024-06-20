@@ -16,7 +16,7 @@ const local = new LocalStrategy(config, async (email, password, done) => {
             err.statusCode = 400;
             throw err;
         }
-        const isPasswordCorrect = bcrypt.compare(password, user.password);
+        const isPasswordCorrect = await bcrypt.compare(password, user.password);
         if (!isPasswordCorrect) {
             const err = new Error('이메일 또는 비밀번호를 확인해주세요.');
             err.statusCode = 400;

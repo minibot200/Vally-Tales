@@ -10,9 +10,8 @@ module.exports = () => {
         done(null, user.shortId);
     });
 
-    passport.deserializeUser((shortId, done) => {
-        userModel.findOne({ shortId }).then((err, user) => {
-            done(null, user);
-        });
+    passport.deserializeUser(async (shortId, done) => {
+        const user = await userModel.findOne({ shortId });
+        done(null, user);
     });
 };
