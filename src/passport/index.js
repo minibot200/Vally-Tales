@@ -11,7 +11,7 @@ module.exports = () => {
     });
 
     passport.deserializeUser(async (shortId, done) => {
-        const user = await userModel.findOne({ shortId });
+        const user = await userModel.findById(shortId);
         done(null, user);
     });
 };

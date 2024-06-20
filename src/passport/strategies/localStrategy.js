@@ -10,7 +10,7 @@ const config = {
 
 const local = new LocalStrategy(config, async (email, password, done) => {
     try {
-        const user = await userModel.findOne({ email });
+        const user = await userModel.findByEmail(email);
         if (!user || !!user.deletedAt) {
             const err = new Error('이메일 또는 비밀번호를 확인해주세요.');
             err.statusCode = 400;
