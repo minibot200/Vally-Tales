@@ -23,6 +23,9 @@
             font-size: 1.25rem;
             font-weight: 500;
         }
+        .education-form {
+            display: none;
+        }
         .education-form input,
         .education-form .buttons {
             margin-bottom: 0.5rem;
@@ -165,12 +168,12 @@
         document.getElementById('addEducationBtn').addEventListener('click', () => {
             editingIndex = -1;
             clearForm();
-            document.getElementById('educationForm').style.display = 'block';
+            toggleEducationForm();
         });
 
         document.getElementById('cancelBtn').addEventListener('click', () => {
             clearForm();
-            document.getElementById('educationForm').style.display = 'none';
+            toggleEducationForm();
         });
 
         document.getElementById('confirmBtn').addEventListener('click', () => {
@@ -197,7 +200,7 @@
 
                 updateEducationList();
                 clearForm();
-                document.getElementById('educationForm').style.display = 'none';
+                toggleEducationForm();
             } else {
                 alert('모든 필드를 입력해 주세요.');
             }
@@ -244,7 +247,7 @@
             degrees.forEach(degree => {
                 degree.checked = (degree.value === item.degree);
             });
-            document.getElementById('educationForm').style.display = 'block';
+            toggleEducationForm(true);
         }
 
         function deleteEducation(index) {
@@ -259,6 +262,15 @@
             degrees.forEach(degree => {
                 degree.checked = false;
             });
+        }
+
+        function toggleEducationForm(forceOpen = false) {
+            const educationForm = document.getElementById('educationForm');
+            if (forceOpen) {
+                educationForm.style.display = 'block';
+            } else {
+                educationForm.style.display = educationForm.style.display === 'block' ? 'none' : 'block';
+            }
         }
 
         // 프로필 수정 기능
