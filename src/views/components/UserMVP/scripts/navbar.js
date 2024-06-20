@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const navbarContainer = document.getElementById("navbar");
 
   // nav bar 요소를 생성
-  navbar.innerHTML = `
+  navbarContainer.innerHTML = `
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Valley-Tales</a>
     <div class="collapse navbar-collapse">
@@ -17,8 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
   엘리스 밸리에서 전해지는 신비한 개발 이야기, 이곳에서 주민들을 만나 보세요.
   </h2>
     `;
-
-  navbarContainer.appendChild(navbar);
+  // navbarContainer.appendChild(navbar);
 });
 
 // Load Navbar Component
