@@ -16,6 +16,9 @@
     />
     <!-- External CSS -->
     <link rel="stylesheet" href="styles/style.css" />
+    <script defer src="./components/UserMVP/scripts/join.js"></script>
+
+    <!-- 통일되지 않은 스타일 태그 주석 처리 -->
     <!-- <style>
       /* 태그 스타일 */
       body {
@@ -146,34 +149,33 @@
       }
     </style> -->
   </head>
-  <!-- 네비바 넣을 곳 -->
-  <div class="text-container" id="navbar"></div>
-  <body class="">
-    <div class="flex-column gap-2rem">
-      <header class="flex-center">
-        <div class="flex flex-between width-60">
-          <p>안녕하세요. 포트폴리오 공유 서비스입니다.</p>
-          <li class="flex-row gap-1rem">
-            <ul class="">
-              <a herf="#">나의 페이지</a>
-            </ul>
-            <ul class="">
-              <a herf="#">네트워크</a>
-            </ul>
+  <div class="text-container" id="navbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="login.html">Valley-Tales</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="login.html">로그인</a>
           </li>
-        </div>
-      </header>
-      <main class="flex-center">
-        <div class="flex-column gap-2rem">
-          <p class="font-menutitle flex-center">회원가입</p>
-          <form
-            class="flex-column flex-center form-size gap-1rem background-white-shadow"
-          >
-            <!-- form 내부를 div 태그로 묶어 gap으로 간격  -->
-            <div>
-              <p class="font-bottom-5px">이메일 주소</p>
-              <input type="text" name="email" class="input-box" />
-              <!-- email 선택지
+        </ul>
+      </div>
+    </nav>
+    <h2 class="text-center mb-4">
+      엘리스 밸리에서 전해지는 신비한 개발 이야기, 이곳에서 주민들을 만나
+      보세요.
+    </h2>
+  </div>
+
+  <body>
+    <main class="flex-center">
+      <div class="flex-column gap-2rem">
+        <p class="">회원가입</p>
+        <form class="card-body" id="join-form">
+          <!-- form 내부를 div 태그로 묶어 gap으로 간격  -->
+          <div>
+            <p class="font-bottom-5px">이메일 주소</p>
+            <input type="email" name="email" class="input-box" />
+            <!-- email 선택지
                @ <div>
             <select>
               <option>gmail.com</option>
@@ -182,58 +184,25 @@
               <option></option>  //직접입력 칸
             </select> 
           </div>-->
-              <p id="email-check-message" class="font-checkmsg">
-              </p>
-            </div>
-            <div>
-              <p class="font-bottom-5px">비밀번호</p>
-              <input type="password" name="password_1st" class="input-box" />
-            </div>
-            <div>
-              <p class="font-bottom-5px">비밀번호 재확인</p>
-              <input type="password" name="password_2nd" class="input-box" />
-              <p id="pw-check-message" class="font-checkmsg">
-              </p>
-            </div>
-            <div>
-              <p class="font-bottom-5px">이름</p>
-              <input type="text" name="user_name" class="input-box" />
-            </div>
-            
-            <button type="submit" class="button-purple">회원가입</button>
-          </form>
-        </div>
-      </main>
-    </div>
-    <script src="./scripts/navbar.js"></script>
-    <script>
-      users=[]
-      document.getElementsByTagName('form')[0].addEventListener('change', function(event) {
-        event.preventDefault(); // 폼의 기본 제출 동작을 막음
+            <p id="email-check-message" class="font-checkmsg"></p>
+          </div>
+          <div>
+            <p class="font-bottom-5px">비밀번호</p>
+            <input type="password" name="password_1st" class="input-box" />
+          </div>
+          <div>
+            <p class="font-bottom-5px">비밀번호 재확인</p>
+            <input type="password" name="password_2nd" class="input-box" />
+            <p id="pw-check-message" class="font-checkmsg"></p>
+          </div>
+          <div>
+            <p class="font-bottom-5px">이름</p>
+            <input type="text" name="user_name" class="input-box" />
+          </div>
 
-        const emailInput = document.getElementsByName('email')[0].value;
-        const password1 = document.getElementsByName('password_1st')[0].value;
-        const password2 = document.getElementsByName('password_2nd')[0].value;
-        console.log(password1)
-        console.log(password2)
-        var emailMessage = '';
-        let passwordMessage = '';
-
-        if (users.some(user => user.email === emailInput)) {
-          emailMessage = '이미 등록된 이메일입니다.';
-        }
-
-        if (password1 !== password2) {
-          passwordMessage = '비밀번호와 비밀번호 확인이 맞지 않습니다.';
-        }
-
-        document.getElementById('email-check-message').textContent = emailMessage;
-        document.getElementById('pw-check-message').textContent = passwordMessage;
-      })
-      if (!emailMessage && !passwordMessage) {
-        alert('회원가입이 완료되었습니다.')
-        users.push({email:emailInput, password:password1, name:username})
-      }
-    </script>
+          <button type="submit" class="button-purple">회원가입</button>
+        </form>
+      </div>
+    </main>
   </body>
 </html>

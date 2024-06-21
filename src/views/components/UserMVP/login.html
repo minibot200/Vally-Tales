@@ -15,17 +15,29 @@
       href="https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css"
     />
     <!-- External CSS -->
-    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <!-- js script -->
+    <script defer src="./components/UserMVP/scripts/login.js"></script>
   </head>
 
-  <!-- 네비바 넣을 곳 -->
-  <div class="text-container" id="navbar"></div>
+  <div class="text-container" id="navbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="login.html">Valley-Tales</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="login.html">로그인</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <h2 class="text-center mb-4">
+      엘리스 밸리에서 전해지는 신비한 개발 이야기, 이곳에서 주민들을 만나
+      보세요.
+    </h2>
+  </div>
 
   <body>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     <div class="container">
       <form class="login-form" id="login-form">
         <label for="email">Email address</label>
@@ -37,7 +49,7 @@
         />
 
         <!-- 이메일 유효성 검사 문구 -->
-        <p id="email-check-msg"></p>
+        <!-- <p id="email-check-msg"></p> -->
 
         <label for="password">Password</label>
         <input
@@ -49,12 +61,15 @@
         <button type="submit" class="btn btn-primary" id="login-btn">
           로그인
         </button>
-        <button type="button" class="register-button btn btn-primary">
+        <button
+          type="button"
+          class="register-button btn btn-primary"
+          id="join-btn-at-login"
+          onclick="location.href='join.html'"
+        >
           회원가입하기
         </button>
       </form>
     </div>
-    <script src="./scripts/navbar.js"></script>
-    <script src="./scripts/login.js"></script>
   </body>
 </html>
