@@ -12,7 +12,7 @@ function onLoginSubmit(event) {
   const loginPassword = loginInputPassword.value;
   if (loginEmail === "") {
     return alert("이메일을 입력해주세요!");
-  } else if (userPassword === "") {
+  } else if (loginPassword === "") {
     return alert("비밀번호를 입력해주세요!");
   }
   console.log(loginEmail);
@@ -21,8 +21,11 @@ function onLoginSubmit(event) {
 }
 
 function fetchPostLogin(loginEmail, loginPassword) {
-  fetch("api/auth/join", {
+  fetch("api/auth/login", {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
       email: loginEmail,
       password: loginPassword,
