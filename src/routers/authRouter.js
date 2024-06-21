@@ -3,11 +3,11 @@ const passport = require('passport');
 
 const router = Router();
 
-const { register, loginRequired, deleteUser, userLogout } = require('../services');
+const { register, deleteUser, userLogout } = require('../services');
 
 // 비밀번호 변경
 // 회원 탈퇴
-router.delete('/', loginRequired, deleteUser, userLogout);
+router.delete('/', deleteUser, userLogout);
 
 // 회원 가입
 router.post('/join', register);
@@ -19,6 +19,6 @@ router.post('/login', (req, res, next) => {
     })(req, res, next);
 })
 
-router.post('/logout', loginRequired, userLogout);
+router.post('/logout', userLogout);
 
 module.exports = router;

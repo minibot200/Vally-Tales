@@ -1,13 +1,11 @@
 const { Router } = require('express');
 
-const { getAllUsers, loginRequired } = require('../services');
+const { getAllUsers, getUser } = require('../services');
 
 const router = Router();
 
-router.get('/', loginRequired, getAllUsers);
+router.get('/', getAllUsers);
 
-router.get('/mypage/:shortId', loginRequired, (req, res) => {
-    res.send("making api");
-});
+router.get('/:userId', getUser);
 
 module.exports = router;
