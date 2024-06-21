@@ -8,24 +8,24 @@ const joinButton = document.getElementById("join-btn-at-login");
 function onLoginSubmit(event) {
   event.preventDefault();
   console.log("로그인 제출");
-  const userEmail = loginInputEmail.value;
-  const userPassword = loginInputPassword.value;
-  if (userEmail === "") {
+  const loginEmail = loginInputEmail.value;
+  const loginPassword = loginInputPassword.value;
+  if (loginEmail === "") {
     return alert("이메일을 입력해주세요!");
   } else if (userPassword === "") {
     return alert("비밀번호를 입력해주세요!");
   }
-  console.log(userEmail);
-  console.log(userPassword);
-  fetchPostLogin(userEmail, userPassword);
+  console.log(loginEmail);
+  console.log(loginPassword);
+  fetchPostLogin(loginEmail, loginPassword);
 }
 
-function fetchPostLogin(userEmail, userPassword) {
+function fetchPostLogin(loginEmail, loginPassword) {
   fetch("api/auth/join", {
     method: "POST",
     body: JSON.stringify({
-      email: userEmail,
-      password: userPassword,
+      email: loginEmail,
+      password: loginPassword,
     }),
   })
     .then((res) => {
