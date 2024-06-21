@@ -21,7 +21,7 @@ function onLoginSubmit(event) {
 }
 
 function fetchPostLogin(loginEmail, loginPassword) {
-  fetch("api/auth/login", {
+  fetch("/api/auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
