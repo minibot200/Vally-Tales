@@ -52,8 +52,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(viewsRouter);
 app.use("/api/auth", authRouter);
+app.use(viewsRouter);
 // 이 뒤로는 무조건 로그인이 필요해집니다.
 app.use(privateViewsRouter);
 app.use("/api/users", usersRouter);
