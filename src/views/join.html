@@ -16,6 +16,7 @@
     />
     <!-- External CSS -->
     <link rel="stylesheet" href="styles/style.css" />
+    <script src="./components/UserMVP/scripts/join.js"></script>
     <!-- <style>
       /* 태그 스타일 */
       body {
@@ -146,34 +147,33 @@
       }
     </style> -->
   </head>
-  <!-- 네비바 넣을 곳 -->
-  <div class="text-container" id="navbar"></div>
-  <body class="">
-    <div class="flex-column gap-2rem">
-      <header class="flex-center">
-        <div class="flex flex-between width-60">
-          <p>안녕하세요. 포트폴리오 공유 서비스입니다.</p>
-          <li class="flex-row gap-1rem">
-            <ul class="">
-              <a herf="#">나의 페이지</a>
-            </ul>
-            <ul class="">
-              <a herf="#">네트워크</a>
-            </ul>
+  <div class="text-container" id="navbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Valley-Tales</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="login.html">로그인</a>
           </li>
-        </div>
-      </header>
-      <main class="flex-center">
-        <div class="flex-column gap-2rem">
-          <p class="font-menutitle flex-center">회원가입</p>
-          <form
-            class="flex-column flex-center form-size gap-1rem background-white-shadow"
-          >
-            <!-- form 내부를 div 태그로 묶어 gap으로 간격  -->
-            <div>
-              <p class="font-bottom-5px">이메일 주소</p>
-              <input type="text" name="email" class="input-box" />
-              <!-- email 선택지
+        </ul>
+      </div>
+    </nav>
+    <h2 class="text-center mb-4">
+      엘리스 밸리에서 전해지는 신비한 개발 이야기, 이곳에서 주민들을 만나
+      보세요.
+    </h2>
+  </div>
+
+  <body>
+    <main class="flex-center">
+      <div class="flex-column gap-2rem">
+        <p class="">회원가입</p>
+        <form class="card-body">
+          <!-- form 내부를 div 태그로 묶어 gap으로 간격  -->
+          <div>
+            <p class="font-bottom-5px">이메일 주소</p>
+            <input type="text" name="email" class="input-box" />
+            <!-- email 선택지
                @ <div>
             <select>
               <option>gmail.com</option>
@@ -182,30 +182,25 @@
               <option></option>  //직접입력 칸
             </select> 
           </div>-->
-              <p id="email-check-message" class="font-checkmsg">
-              </p>
-            </div>
-            <div>
-              <p class="font-bottom-5px">비밀번호</p>
-              <input type="password" name="password_1st" class="input-box" />
-            </div>
-            <div>
-              <p class="font-bottom-5px">비밀번호 재확인</p>
-              <input type="password" name="password_2nd" class="input-box" />
-              <p id="pw-check-message" class="font-checkmsg">
-              </p>
-            </div>
-            <div>
-              <p class="font-bottom-5px">이름</p>
-              <input type="text" name="user_name" class="input-box" />
-            </div>
-            
-            <button type="submit" class="button-purple">회원가입</button>
-          </form>
-        </div>
-      </main>
-    </div>
-    <script src="./scripts/navbar.js"></script>
-    <script src="./join.js"></script>
+            <p id="email-check-message" class="font-checkmsg"></p>
+          </div>
+          <div>
+            <p class="font-bottom-5px">비밀번호</p>
+            <input type="password" name="password_1st" class="input-box" />
+          </div>
+          <div>
+            <p class="font-bottom-5px">비밀번호 재확인</p>
+            <input type="password" name="password_2nd" class="input-box" />
+            <p id="pw-check-message" class="font-checkmsg"></p>
+          </div>
+          <div>
+            <p class="font-bottom-5px">이름</p>
+            <input type="text" name="user_name" class="input-box" />
+          </div>
+
+          <button type="submit" class="button-purple">회원가입</button>
+        </form>
+      </div>
+    </main>
   </body>
 </html>
