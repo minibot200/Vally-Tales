@@ -7,11 +7,11 @@ module.exports = () => {
     passport.use(local);
 
     passport.serializeUser((user, done) => {
-        done(null, user.shortId);
+        done(null, user.userId);
     });
 
-    passport.deserializeUser(async (shortId, done) => {
-        const user = await userModel.findById(shortId);
+    passport.deserializeUser(async (userId, done) => {
+        const user = await userModel.findById(userId);
         done(null, user);
     });
 };

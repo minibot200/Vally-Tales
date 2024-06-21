@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const shortId = require('./types/shortId');
 
 const ProjectSchema = new Schema({
+  projectId: shortId,
   author: {
     type: Schema.Types.ObjectId,
     ref: 'User',

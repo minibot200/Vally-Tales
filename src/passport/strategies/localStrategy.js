@@ -1,4 +1,4 @@
-const LocalStrategy = require('passport-local').Strategy;
+const LocalStrategy = require('passport-local');
 const bcrypt = require('bcrypt');
 
 const { userModel } = require('../../db/models'); // 아직 작성 안 됨

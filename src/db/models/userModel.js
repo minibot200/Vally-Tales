@@ -30,8 +30,8 @@ class User {
     return user;
   }
 
-  static async findById(shortId) {
-    const user = await UserModel.findOne({ shortId }); // findOne -> findById로 변경
+  static async findById(userId) {
+    const user = await UserModel.findOne({ userId }); // findOne -> findById로 변경
     return user;
   }
 
@@ -41,8 +41,8 @@ class User {
     return users;
   }
 
-  static async updateById(shortId, newValues) {
-    const filter = { shortId }; // id -> _id로 변경
+  static async updateById(userId, newValues) {
+    const filter = { userId }; // id -> _id로 변경
     const update = { $set: newValues };
     const options = { new: true }; // returnDocument: 'after' -> new: true로 변경
 
@@ -50,10 +50,10 @@ class User {
     return updatedUser;
   }
 
-  static async deleteById(shortId) {
-    const user = await UserModel.find({ shortId });
+  static async deleteById(userId) {
+    const user = await UserModel.find({ userId });
     if (!user.deletedAt) {
-      await UserModel.updateOne({ shortId }, { deletedAt: Date.now() }); // deleteOne -> findByIdAndDelete로 변경
+      await UserModel.updateOne({ userId }, { deletedAt: Date.now() }); // deleteOne -> findByIdAndDelete로 변경
       return '삭제가 완료되었습니다.';
     }
     return '이미 삭제된 계정입니다.';

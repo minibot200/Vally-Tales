@@ -42,6 +42,7 @@ app.use(session({
     }),
     cookie: {
         httpOnly: true,
+        secure: false,
         expires: new Date(Date.now() + 3600000),
     },
 }));

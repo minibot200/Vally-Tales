@@ -15,9 +15,7 @@ router.post('/join', register);
 // 로그인
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
-        successRedirect: '/',
-        failureRedirect: '/',
-        failureFlash: true,
+        successRedirect: '/users',
     })(req, res, next);
 })
 
