@@ -9,6 +9,10 @@ const {
     addEducation,
     editEducation, 
     deleteEducation,
+    getAllAwards,
+    addAward,
+    editAward,
+    deleteAward,
 } = require('../services');
 
 const router = Router();
@@ -21,5 +25,10 @@ router.get('/:userId/educations', getAllEducations);
 router.post('/:userId/educations', checkAuthorization, addEducation);
 router.put('/:userId/educations/:educationId', checkAuthorization, editEducation);
 router.delete('/:userId/educations/:educationId', checkAuthorization, deleteEducation);
+// 수상 라우터
+router.get('/:userId/awards', getAllAwards);
+router.get('/:userId/awards/:awardId', checkAuthorization, addAward);
+router.get('/:userId/awards/:awardId', checkAuthorization, editAward);
+router.get('/:userId/awards/:awardId', checkAuthorization, deleteAward);
 
 module.exports = router;

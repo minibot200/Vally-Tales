@@ -1,4 +1,4 @@
-const { userModel, educationModel } = require('../db/models');
+const { userModel, educationModel } = require('../../db/models');
 
 const addEducation = async (req, res, next) => {
     const { school, degree, major, startDate, endDate } = req.body;

@@ -1,4 +1,4 @@
-const { userModel, educationModel } = require('../db/models');
+const { userModel, educationModel } = require('../../db/models');
 
 const getAllEducations = async (req, res, next) => {
     try {

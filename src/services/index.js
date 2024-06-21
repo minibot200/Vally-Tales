@@ -1,13 +1,20 @@
-const getAllUsers = require('./getAllUsers');
-const getUser = require('./getUser');
-const editUser = require('./editUser');
-const getAllEducations = require('./getAllEducations');
-const addEducation = require('./addEducation');
-const editEducation = require('./editEducation');
-const deleteEducation = require('./deleteEducation');
+const getAllUsers = require('./user/getAllUsers');
+const getUser = require('./user/getUser');
+const editUser = require('./user/editUser');
+const deleteUser = require('./user/deleteUser');
+
+const getAllEducations = require('./education/getAllEducations');
+const addEducation = require('./education/addEducation');
+const editEducation = require('./education/editEducation');
+const deleteEducation = require('./education/deleteEducation');
+
+const getAllAwards = require('./award/getAllAwards');
+const addAward = require('./award/addAward');
+const editAward = require('./award/editAward');
+const deleteAward = require('./award/deleteAward');
+
 const register = require('./register');
 const serveStatic = require('./serveStatic');
-const deleteUser = require('./deleteUser');
 const userLogout = require('./userLogout');
 
 module.exports = {
@@ -18,6 +25,10 @@ module.exports = {
     addEducation,
     editEducation,
     deleteEducation,
+    getAllAwards,
+    addAward,
+    editAward,
+    deleteAward,
     register,
     serveStatic,
     deleteUser,
