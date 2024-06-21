@@ -17,6 +17,9 @@ const EducationSchema = new Schema({
     type: String,
     required: true,
   },
+  major: {
+    type: String,
+  },
   startDate: {
     type: Date,
     default: Date.now,

@@ -31,7 +31,7 @@ app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'html');
 
 app.use(express.json());
-app.use(express.urlencoded({ extend: false }));
+app.use(express.urlencoded({ extend: true }));
 app.use(cookieParser(secretKey));
 
 app.use(session({
@@ -52,7 +52,7 @@ app.use(passport.session());
 
 app.use(viewsRouter);
 app.use('/api/auth', authRouter);
-// 이제 이 뒤로는 무조건 로그인이 필요해집니다.
+// 이 뒤로는 무조건 로그인이 필요해집니다.
 app.use(privateViewsRouter);
 app.use('/api/users', usersRouter);
 

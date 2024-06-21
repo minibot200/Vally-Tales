@@ -5,9 +5,11 @@ const router = Router();
 
 const { register, deleteUser, userLogout } = require('../services');
 
+const { loginRequired } = require('../middlewares');
+
 // 비밀번호 변경
 // 회원 탈퇴
-router.delete('/', deleteUser, userLogout);
+router.delete('/', loginRequired, deleteUser, userLogout);
 
 // 회원 가입
 router.post('/join', register);
@@ -18,7 +20,7 @@ router.post('/login', (req, res, next) => {
         successRedirect: '/users',
     })(req, res, next);
 })
-
-router.post('/logout', userLogout);
+// 로그아웃
+router.post('/logout', loginRequired, userLogout);
 
 module.exports = router;

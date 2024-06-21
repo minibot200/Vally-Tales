@@ -6,6 +6,7 @@ const getAllUsers = async (req, res) => {
         name: user.name,
         email: user.email,
         description: user.description,
+        userId: user.userId,
     }));
     return res.json(data);
 }
