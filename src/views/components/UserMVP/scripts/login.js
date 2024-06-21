@@ -4,29 +4,32 @@ const loginInputPassword = document.getElementById("login-password");
 const loginButton = document.getElementById("login-btn");
 const joinButton = document.getElementById("join-btn-at-login");
 
-console.log(loginForm);
-
 // 로그인 버튼 submit event
 function onLoginSubmit(event) {
   event.preventDefault();
-  const useremail = loginInputEmail.value;
-  const userpassword = loginInputPassword.value;
-  console.log(useremail);
-  console.log(userpassword);
-  fetchPostLogin(useremail, userpassword);
+  console.log("로그인 제출");
+  const userEmail = loginInputEmail.value;
+  const userPassword = loginInputPassword.value;
+  if (userEmail === "") {
+    return alert("이메일을 입력해주세요!");
+  } else if (userPassword === "") {
+    return alert("비밀번호를 입력해주세요!");
+  }
+  console.log(userEmail);
+  console.log(userPassword);
+  fetchPostLogin(userEmail, userPassword);
 }
 
-loginForm.addEventListener("submit", onLoginSubmit);
-
-function fetchPostLogin(useremail, userpassword) {
+function fetchPostLogin(userEmail, userPassword) {
   fetch("api/auth/join", {
     method: "POST",
     body: JSON.stringify({
-      email: useremail,
-      password: userpassword,
+      email: userEmail,
+      password: userPassword,
     }),
   })
     .then((res) => {
+      console.log(res);
       if (!res.ok) {
         console.log("response error");
         throw new Error("네트워크 응답이 올바르지 않습니다.");
@@ -41,19 +44,21 @@ function fetchPostLogin(useremail, userpassword) {
     });
 }
 
-// text 정보만 사용 가능
-const nonBodyMethods = ["GET", "DELETE"];
-const baseApi = async (url, method, data = {}, headers) => {
-  const userId = localStorage.getItem("userId");
-  try {
-    if (nonBodyMethods.includes(method)) {
-      // GET, DELETE 요청이면 바디 없이 fetch
-      return await fetch(url, { method, headers });
-    }
-    // POST, PUT 요청이면 바디 있는 fetch
-    return await fetch(url, { method, body: JSON.stringify(data) });
-  } catch (err) {
-    console.log("login - try error");
-    console.log(err);
-  }
-};
+loginForm.addEventListener("submit", onLoginSubmit);
+
+// // text 정보만 사용 가능
+// const nonBodyMethods = ["GET", "DELETE"];
+// const baseApi = async (url, method, data = {}, headers) => {
+//   const userId = localStorage.getItem("userId");
+//   try {
+//     if (nonBodyMethods.includes(method)) {
+//       // GET, DELETE 요청이면 바디 없이 fetch
+//       return await fetch(url, { method, headers });
+//     }
+//     // POST, PUT 요청이면 바디 있는 fetch
+//     return await fetch(url, { method, body: JSON.stringify(data) });
+//   } catch (err) {
+//     console.log("login - try error");
+//     console.log(err);
+//   }
+// };
