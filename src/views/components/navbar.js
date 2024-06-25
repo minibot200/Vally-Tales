@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link" href="/">마이 페이지</a></li>
         <li class="nav-item"><a class="nav-link" href="/users">네트워크</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">로그아웃</a></li>
+        <li class="nav-item"><a class="nav-link" href="/">로그아웃</a></li>
       </ul>
     </div>
   </nav>
