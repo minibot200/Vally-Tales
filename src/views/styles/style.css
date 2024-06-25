@@ -1,0 +1,113 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.navbar {
+    margin-bottom: 30px;
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #7357e1;
+    margin-left: 20px;
+}
+
+.nav-link {
+    color: #343a40;
+    transition: color 0.2s;
+}
+
+.nav-link:hover {
+    color: #9272FF;
+}
+
+.nav-link:active {
+    color: #B28DFF;
+}
+
+.nav-link:focus {
+    color: #D1AAFF;
+}
+
+h2 {
+    color: #343a40;
+    margin-bottom: 40px;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 0 15px;
+}
+
+.card {
+    flex: 1 1 calc(33.333% - 30px);
+    margin: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: center;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.card-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.card-title {
+    margin: 10px 0;
+    font-size: 1.25rem;
+    color: #343a40;
+}
+
+.card-text {
+    margin-bottom: 10px;
+    color: #6c757d;
+}
+
+.btn-primary {
+    background-color: #7357e1;
+    border-color: #7357e1;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #9272FF;
+    border-color: #9272FF;
+}
+
+.btn-primary:active {
+    background-color: #B28DFF;
+    border-color: #B28DFF;
+}
+
+.btn-primary:focus {
+    background-color: #D1AAFF;
+    border-color: #D1AAFF;
+    box-shadow: 0 0 0 0.2rem rgba(115, 87, 225, 0.5);
+}
+
+.education-list, .award-list, .certificate-list, .project-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
