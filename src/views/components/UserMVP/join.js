@@ -38,6 +38,7 @@ function onJoinSubmit(event) {
   const userInfo = { joinEmail, joinPassword, joinName };
 
   console.log(userInfo);
+  fetchPostJoin(joinEmail, joinPassword, joinName);
 
   // fetch post API 요청
 }
@@ -59,7 +60,7 @@ function checkPassword() {
   return;
 }
 
-function fetchPostJoin() {
+function fetchPostJoin(joinEmail, joinPassword, joinName) {
   fetch("/api/auth/join", {
     method: "POST",
     headers: {
