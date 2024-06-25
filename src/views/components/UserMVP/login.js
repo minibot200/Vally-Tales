@@ -44,7 +44,7 @@ function fetchPostLogin(loginEmail, loginPassword) {
     console.log(res);
     if (res.redirected) {
       console.log("유저페이지로 이동");
-      window.location.href = `/`;
+      window.location.href = res.url;
       return;
     } else if (res.status === 400) {
       return alert(`error : 이메일 또는 비밀번호를 확인해 주세요!`);

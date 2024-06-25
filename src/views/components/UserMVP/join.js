@@ -76,7 +76,7 @@ function fetchPostJoin(joinEmail, joinPassword, joinName) {
     if (res.redirected) {
       console.log("로그인페이지로 이동");
       alert(`회원가입에 성공했습니다!`);
-      window.location.href = `/`;
+      window.location.href = res.url;
       return;
     } else {
       alert(`error : 회원가입에 실패했습니다.`);
