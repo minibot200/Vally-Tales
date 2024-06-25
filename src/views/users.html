@@ -16,33 +16,11 @@
     />
     <!-- External CSS -->
     <link rel="stylesheet" href="./styles/style.css" />
-    <!-- <script defer src="./components/navbar.js"></script> -->
+    <script type="module" src="components/navbar.js"></script>
     <script type="module" defer src="./components/UserMVP/users.js"></script>
-    <!-- <script defer src="./components/logout.js"></script> -->
   </head>
   <body>
-    <div id="navbar">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">Valley-Tales</a>
-        <div class="collapse navbar-collapse">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/">마이 페이지</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/users">네트워크</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" id="logout">로그아웃</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <h2 class="text-center mb-4">
-        엘리스 밸리에서 전해지는 신비한 개발 이야기, 이곳에서 주민들을 만나
-        보세요.
-      </h2>
-    </div>
+    <div id="navbar"></div>
     <div class="container mt-5">
       <div id="userCards" class="row">
         <!-- 사용자 카드가 여기에 동적으로 추가됩니다. -->
