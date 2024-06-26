@@ -2,31 +2,6 @@
 import { showElement, hideElement } from "../utils.js";
 import { getUserId, loadProfileData } from "../loadUserData_2.js";
 
-//userId path에서 추출
-const userId = getUserId();
-console.log(userId);
-localStorage.removeItem("userId");
-localStorage.setItem("userId", userId);
-console.log(localStorage.getItem("userId"));
-
-async function loadData(userId) {
-  //get api 호출 후 data 저장
-  const userData = await loadProfileData(userId);
-  console.log(userData);
-  const canEdit = userData.canEdit;
-  console.log(canEdit);
-
-  //로컬에 canEdit 저장
-  localStorage.removeItem("canEdit");
-  localStorage.setItem("canEdit", canEdit);
-  console.log(localStorage.getItem("canEdit"));
-
-  if (canEdit === "false") {
-    editProfileBtn.className += " hidden";
-    profileButtons.className += " hidden";
-  }
-}
-
 // 프로필 수정 기능
 const editProfileBtn = document.getElementById("editProfileBtn");
 const profileButtons = document.getElementById("profileButtons");
@@ -40,6 +15,37 @@ const profileImage = document.getElementById("profileImage");
 const imageURLInput = document.getElementById("imageURLInput");
 // const imageFileInput = document.getElementById("imageFileInput");
 const imagePreview = document.getElementById("imagePreview");
+
+//userId path에서 추출
+const userId = getUserId();
+localStorage.removeItem("userId");
+localStorage.setItem("userId", userId);
+console.log(localStorage.getItem("userId"));
+
+async function loadData(userId) {
+  //get api 호출 후 data 저장
+  const userData = await loadProfileData(userId);
+  console.log(`누구의 데이터를 로드? ${userId}`);
+  const canEdit = userData.canEdit;
+
+  //로컬에 canEdit 저장
+  localStorage.removeItem("canEdit");
+  localStorage.setItem("canEdit", canEdit);
+  console.log(`로컬에 저장 ${localStorage.getItem("canEdit")}`);
+}
+
+// 초기 로드 시 편집 섹션 숨기기
+const elementsToHide = [
+  nameInput,
+  emailInput,
+  bioInput,
+  imageURLInput,
+  // imageFileInput,
+  imagePreview,
+  profileButtons,
+];
+
+elementsToHide.forEach(hideElement);
 
 editProfileBtn.addEventListener("click", () => {
   nameInput.value = nameText.innerText;
@@ -109,7 +115,24 @@ function hideProfileEdit() {
   showElement(editProfileBtn);
 }
 
-hideProfileEdit();
-loadData(userId);
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadData(userId);
+  const canEdit = await localStorage.getItem("canEdit");
+
+  console.log(`내가 비교한 canEdit ${canEdit}`);
+  if (canEdit === "false") {
+    editProfileBtn.className += " hidden";
+    profileButtons.className += " hidden";
+  }
+});
+
+// 기다렸다가 canEdit 받아오기
+// const canEdit = await localStorage.getItem("canEdit");
+
+// console.log(`내가 비교한 canEdit ${canEdit}`);
+// if (canEdit === "false") {
+//   editProfileBtn.className += " hidden";
+//   profileButtons.className += " hidden";
+// }
 
 // 수정 api 요청
