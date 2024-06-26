@@ -37,5 +37,5 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 
 // 로그아웃
-const logoutTag = document.getElementById("logout");
-logoutTag.addEventListener("click", fetchPostLogout);
+// const logoutTag = document.getElementById("logout");
+// logoutTag.addEventListener("click", fetchPostLogout);
