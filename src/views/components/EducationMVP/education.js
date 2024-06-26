@@ -1,6 +1,13 @@
 // education.js
 import { showElement, hideElement } from "../utils.js";
-import { getUserId, loadEducationData } from "../loadUserData_2.js";
+import {
+  getUserId,
+  changeDate,
+  deleteAPI,
+  putAPI,
+  postAPI,
+  getAPI,
+} from "../apiRequest.js";
 
 const addEducationBtn = document.getElementById("addEducationBtn");
 const educationForm = document.getElementById("educationForm");
@@ -8,83 +15,159 @@ const schoolNameInput = document.getElementById("schoolName");
 const majorInput = document.getElementById("major");
 const startDateInput = document.getElementById("startDate");
 const endDateInput = document.getElementById("endDate");
-let educationList = []; // let으로 변경(전역 변수로)
 
-async function loadData(userId) {
-  const userData = await loadEducationData(userId);
-  educationList = userData; // educationList에 userData 할당
+let educationList = [];
 
-  let educationEditingIndex = -1;
-  addEducationBtn.addEventListener("click", () => {
-    educationEditingIndex = -1;
-    clearEducationForm();
-    toggleEducationForm();
-  });
-
-  updateEducationList();
-}
-
-loadData(localStorage.getItem("userId"));
-
-document.getElementById("cancelBtn").addEventListener("click", () => {
+let educationEditingIndex = -1;
+addEducationBtn.addEventListener("click", () => {
+  educationEditingIndex = -1;
   clearEducationForm();
   toggleEducationForm();
 });
 
-document.getElementById("confirmBtn").addEventListener("click", async (e) => { // async 추가
+//확인버튼 동작
+const handleClickConfirm = (e) => {
   e.preventDefault();
-  const degreeElement = document.querySelector('input[name="degree"]:checked');
-  const degree = degreeElement ? degreeElement.value : "";
+  const itemDegree = selectedDegree();
 
-  if (
+  // 재학중이면 endDate 입력X
+  const blankControl =
     schoolNameInput.value &&
     majorInput.value &&
-    degree &&
-    startDateInput.value &&
-    endDateInput.value
-  ) {
-    const educationData = {
+    itemDegree &&
+    startDateInput.value;
+
+  if (blankControl) {
+    if (itemDegree !== "재학중") {
+      if (!endDate.value) {
+        return alert("모든 필드를 입력해주세요!");
+      }
+    }
+  } else {
+    return alert("모든 필드를 입력해주세요!");
+  }
+
+  const educationData = {
+    school: schoolNameInput.value,
+    major: majorInput.value,
+    degree: itemDegree,
+    startDate: startDate.value,
+    endDate: endDate.value,
+  };
+
+  if (educationEditingIndex === -1) {
+    // 이 전에 없으면 추가
+    educationList.push({
       schoolName: schoolNameInput.value,
       major: majorInput.value,
-      degree: degree,
-      startDate: startDateInput.value,
-      endDate: endDateInput.value,
+      degree: itemDegree,
+      startDate: startDate.value,
+      endDate: endDate.value,
+    });
+    const educationData = {
+      school: schoolNameInput.value,
+      major: majorInput.value,
+      degree: itemDegree,
+      startDate: startDate.value,
+      endDate: endDate.value,
+    };
+    console.log(`추가한 데이터 ${educationData}`);
+    //post
+    postEducation(educationData);
+  } else {
+    // 있으면 수정
+    educationList[educationEditingIndex] = {
+      schoolName: schoolNameInput.value,
+      major: majorInput.value,
+      degree: itemDegree,
+      startDate: startDate.value,
+      endDate: endDate.value,
+      educationId: educationList[educationEditingIndex].educationId,
+    };
+    const educationData = {
+      school: schoolNameInput.value,
+      major: majorInput.value,
+      degree: itemDegree,
+      startDate: startDate.value,
+      endDate: endDate.value,
+      educationId: educationList[educationEditingIndex].educationId,
     };
 
-    if (educationEditingIndex === -1) {
-      // 새로운 학력 추가
-      const result = await addEducation(localStorage.getItem("userId"), educationData); // addEducation 호출 및 결과 저장
-      educationList.push(result); // educationList에 추가
-    } else {
-      // 기존 학력 수정
-      const result = await updateEducation(localStorage.getItem("userId"), educationList[educationEditingIndex].id, educationData); // updateEducation 호출 및 결과 저장
-      educationList[educationEditingIndex] = result; // educationList 업데이트
-      educationEditingIndex = -1;
-    }
+    console.log(`수정한 데이터 ${educationData}`);
+    // put
+    putEducation(educationEditingIndex, educationData);
 
-    updateEducationList();
-    clearEducationForm();
-    toggleEducationForm();
-  } else {
-    alert("모든 필드를 입력해 주세요.");
+    educationEditingIndex = -1;
   }
-});
+  console.log(`${educationList}`);
+  // post / put 요청 함수 안에서 재랜더해서 주석처리
+  //   console.log("재랜더");
+  //   renderEducationList();
+  clearEducationForm();
+  toggleEducationForm();
+};
 
-function updateEducationList() {
+//재학중 선택할 경우 졸업일 disabled 추가하기
+
+//빈칸 검사
+const checkBlank = (degree) => {
+  const blankControl =
+    schoolNameInput.value && majorInput.value && degree && startDateInput.value;
+
+  if (blankControl) {
+    if (degree !== "재학중") {
+      if (!endDate.value) {
+        return alert("모든 필드를 입력해주세요!");
+      }
+    }
+  } else {
+    return alert("모든 필드를 입력해주세요!");
+  }
+};
+
+// 학력 업데이트
+const renderEducationList = async () => {
+  // get 실행
+  console.log(`${localStorage.getItem("userId")}의 학력데이터`);
+  const userId = localStorage.getItem("userId");
+  const educationListData = await getAPI("educations", userId); // response 대기중
+  educationList = educationListData;
+
+  // (+) btn hidden
+  const canEdit = localStorage.getItem("canEdit");
+  console.log(`내가 사용할 canEdit ${canEdit}`);
+  if (canEdit === "false") {
+    addEducationBtn.className += " hidden";
+  }
+
   const fragment = document.createDocumentFragment();
   const educationListDiv = document.getElementById("educationList");
   educationListDiv.innerHTML = "";
 
   educationList.forEach((item, index) => {
+    // html 만들기
     const educationItemDiv = document.createElement("div");
     educationItemDiv.className = "education-item";
 
     const educationText = document.createElement("span");
-    educationText.innerText = `${item.schoolName} ${item.major} (${item.degree}) ${item.startDate}~${item.endDate}`;
+    if (item.startDate && item.endDate) {
+      const start = changeDate(item.startDate);
+      const end = changeDate(item.endDate);
+      educationText.innerText = `${item.school} ${item.major} (${item.degree}) ${start} ~ ${end}`;
+    } else {
+      const start = changeDate(item.startDate);
+      educationText.innerText = `${item.school} ${item.major} (${item.degree}) ${start} ~ `;
+    }
+
+    // educationText.innerText = `${item.school} ${item.major} (${item.degree}) ${date}`;
     educationItemDiv.appendChild(educationText);
 
     const editBtn = document.createElement("button");
     editBtn.className = "edit-btn btn btn-link";
+    console.log(`이 페이지에 적용된 ${canEdit}`);
+    if (canEdit === "false") {
+      editBtn.className += " hidden";
+    }
     editBtn.innerText = "편집";
     editBtn.addEventListener("click", () => {
       editEducation(index);
@@ -94,6 +177,9 @@ function updateEducationList() {
     const deleteBtn = document.createElement("button");
     deleteBtn.className = "delete-btn btn btn-link";
     deleteBtn.innerText = "삭제";
+    if (canEdit === "false") {
+      deleteBtn.className += " hidden";
+    }
     deleteBtn.addEventListener("click", () => {
       deleteEducation(index);
     });
@@ -102,26 +188,16 @@ function updateEducationList() {
     fragment.appendChild(educationItemDiv);
   });
   educationListDiv.appendChild(fragment);
-}
+};
 
-function editEducation(index) {
-  educationEditingIndex = index;
-  const item = educationList[index];
-  schoolNameInput.value = item.schoolName;
-  majorInput.value = item.major;
-  const degrees = document.getElementsByName("degree");
-  degrees.forEach((degree) => {
-    degree.checked = degree.value === item.degree;
-  });
-  startDateInput.value = item.startDate;
-  endDateInput.value = item.endDate;
-  toggleEducationForm(true);
-}
-
-async function deleteEducation(index) { // async 추가
-  const result = await deleteEducationAPI(localStorage.getItem("userId"), educationList[index].id); // deleteEducationAPI 호출
-  educationList.splice(index, 1);
-  updateEducationList();
+//토글 on/off
+function toggleEducationForm(forceOpen = false) {
+  if (forceOpen) {
+    showElement(educationForm);
+  } else {
+    educationForm.style.display =
+      educationForm.style.display === "block" ? "none" : "block";
+  }
 }
 
 function clearEducationForm() {
@@ -135,71 +211,76 @@ function clearEducationForm() {
   endDateInput.value = "";
 }
 
-function toggleEducationForm(forceOpen = false) {
-  if (forceOpen) {
-    showElement(educationForm);
-  } else {
-    educationForm.style.display =
-      educationForm.style.display === "block" ? "none" : "block";
+//취소 버튼 이벤트
+document.getElementById("cancelBtn").addEventListener("click", (e) => {
+  e.preventDefault();
+  clearEducationForm();
+  toggleEducationForm();
+});
+
+//confirmBtn 클릭 시 동작 이벤트
+document
+  .getElementById("confirmBtn")
+  .addEventListener("click", handleClickConfirm);
+
+//편집버튼 클릭하면 나오는 input창에 기존 정보 나오게 세팅
+function editEducation(index) {
+  educationEditingIndex = index;
+  const item = educationList[index];
+  console.log(item);
+  schoolNameInput.value = item.school;
+  majorInput.value = item.major;
+  const degrees = document.getElementsByName("degree");
+  console.log(item.degree);
+  degrees.forEach((degree) => {
+    degree.checked = degree.value === item.degree;
+  });
+  startDateInput.value = item.startDate.substr(0, 10);
+  if (item.endDate) {
+    endDateInput.value = item.endDate.substr(0, 10);
   }
+  toggleEducationForm(true);
 }
 
-// 학력 조회 함수
-const getEducations = async (userId) => {
-  try {
-    const response = await fetch(`/api/users/${userId}/educations`, {
-      method: "GET",
-      credentials: "include", // 세션 쿠키 포함
-    });
-    const result = await response.json();
-    return result; // 결과 반환
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
+function selectedDegree() {
+  const degreeElement = document.querySelector('input[name="degree"]:checked');
 
-// 학력 추가 함수
-const addEducation = async (userId, educationData) => {
-  try {
-    const response = await fetch(`/api/users/${userId}/educations`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(educationData),
-      credentials: "include", // 세션 쿠키 포함
-    });
-    const result = await response.json();
-    return result; // 결과 반환
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
+  //라디오버튼 값 할당
+  const degree = degreeElement ? degreeElement.value : "";
+  return degree;
+}
 
-// 학력 수정 함수 추가
-const updateEducation = async (userId, educationId, educationData) => {
-  try {
-    const response = await fetch(`/api/users/${userId}/educations/${educationId}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(educationData),
-      credentials: "include", // 세션 쿠키 포함
-    });
-    const result = await response.json();
-    return result; // 결과 반환
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
+async function deleteEducation(index) {
+  // async 추가
+  // deleteEducationAPI 호출
+  console.log(educationList[index]);
+  const result = await deleteAPI(
+    "educations",
+    educationList[index].educationId
+  );
+  educationList.splice(index, 1);
+  console.log("delete 요청 후 재랜더");
+  renderEducationList();
+}
 
-// 학력 삭제 함수 추가
-const deleteEducationAPI = async (userId, educationId) => {
-  try {
-    const response = await fetch(`/api/users/${userId}/educations/${educationId}`, {
-      method: "DELETE",
-      credentials: "include", // 세션 쿠키 포함
-    });
-    const result = await response.json();
-    return result; // 결과 반환
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
+async function putEducation(index, data) {
+  console.log(educationList[index]);
+  const result = await putAPI(
+    "educations",
+    educationList[index].educationId,
+    data
+  );
+  console.log("put 요청 후 재랜더");
+  renderEducationList();
+}
+
+async function postEducation(data) {
+  const result = await postAPI("educations", data);
+  console.log("post 요청 후 재랜더");
+  renderEducationList();
+}
+
+// 페이지 전부 로드 시 이벤트
+window.addEventListener("load", () => {
+  renderEducationList();
+});

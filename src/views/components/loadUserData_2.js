@@ -1,6 +1,3 @@
-// loadUserData.js
-import { fetchGetInfo } from "./getInfo.js";
-
 //userId 가져오기
 export const getUserId = () => {
   const path = window.location.pathname;
@@ -40,9 +37,9 @@ export async function getCanEdit(userId) {
   return data;
 }
 
-export async function loadEducationData(userId) {
+export async function getAPI(mvp, userId) {
   // API 호출
-  const response = await fetch(`/api/educations/${userId}`, {
+  const response = await fetch(`/api/${mvp}/${userId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -100,12 +97,9 @@ export async function loadCertificateData(userId) {
   return data;
 }
 
-export function changeDate(startDate, endDate) {
-  const startRaw = startDate;
-  const start = startRaw.substr(0, 10);
-  const endRaw = endDate;
-  const end = endRaw.substr(0, 10);
-  return `${start} ~ ${end}`;
+export function changeDate(date) {
+  const dateRaw = date;
+  return dateRaw.substr(0, 10);
 }
 
 // 기존 코드
@@ -172,9 +166,8 @@ export function changeDate(startDate, endDate) {
 // }
 
 function updateProfileSection(data) {
-  document.getElementById("profileImage").src = data.profileImage
-    ? data.profileImage
-    : "https://cataas.com/cat";
+  document.getElementById("profileImage").src = "../images/profile.png";
+  // data.profileImage  ? data.profileImage : "https://cataas.com/cat";
   document.getElementById("nameText").innerText = data.name || "이름 없음";
   document.getElementById("emailText").innerText = data.email || "이메일 없음";
   document.getElementById("bioText").innerText =

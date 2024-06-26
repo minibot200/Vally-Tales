@@ -1,5 +1,5 @@
 import { fetchPostLogout } from "../logout.js";
-import { fetchGetInfo } from "../getInfo.js";
+import { fetchGetInfo } from "../apiRequest.js";
 // 새 코드
 document.addEventListener("DOMContentLoaded", async function () {
   const userCardsContainer = document.getElementById("userCards");
