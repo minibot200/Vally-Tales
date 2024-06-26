@@ -20,9 +20,12 @@ async function loadData(userId) {
   localStorage.removeItem("canEdit");
   localStorage.setItem("canEdit", canEdit);
   console.log(localStorage.getItem("canEdit"));
-}
 
-loadData(userId);
+  if (canEdit === "false") {
+    editProfileBtn.className += " hidden";
+    profileButtons.className += " hidden";
+  }
+}
 
 // 프로필 수정 기능
 const editProfileBtn = document.getElementById("editProfileBtn");
@@ -105,5 +108,8 @@ function hideProfileEdit() {
 
   showElement(editProfileBtn);
 }
+
+hideProfileEdit();
+loadData(userId);
 
 // 수정 api 요청

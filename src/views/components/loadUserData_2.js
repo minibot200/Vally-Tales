@@ -100,6 +100,14 @@ export async function loadCertificateData(userId) {
   return data;
 }
 
+export function changeDate(startDate, endDate) {
+  const startRaw = startDate;
+  const start = startRaw.substr(0, 10);
+  const endRaw = endDate;
+  const end = endRaw.substr(0, 10);
+  return `${start} ~ ${end}`;
+}
+
 // 기존 코드
 // export function loadUserData(userId) {
 //   // 사용자 정보 가져오기

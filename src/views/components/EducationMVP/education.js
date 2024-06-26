@@ -1,6 +1,6 @@
 // education.js
 import { showElement, hideElement } from "../utils.js";
-import { getUserId, loadEducationData } from "../loadUserData_2.js";
+import { getUserId, loadEducationData, changeDate } from "../loadUserData_2.js";
 
 const addEducationBtn = document.getElementById("addEducationBtn");
 const educationForm = document.getElementById("educationForm");
@@ -8,16 +8,24 @@ const schoolNameInput = document.getElementById("schoolName");
 const majorInput = document.getElementById("major");
 const startDateInput = document.getElementById("startDate");
 const endDateInput = document.getElementById("endDate");
-// const educationList = [];
+const educationList = [];
 
 async function loadData() {
   //get api 호출 후 data 저장
   const userId = await getUserId();
+  // const userId = await localStorage.getItem("userId");
   console.log(userId);
   const userData = await loadEducationData(userId);
-  const educationList = userData;
+  educationList.push(userData);
   console.log(educationList);
+  const canEdit = await localStorage.getItem("canEdit");
 
+  // 편집버튼 유무
+  if (canEdit === "false") {
+    addEducationBtn.className += " hidden";
+  }
+
+  // add버튼을 누른지 확인
   let educationEditingIndex = -1;
   addEducationBtn.addEventListener("click", () => {
     educationEditingIndex = -1;
@@ -26,9 +34,9 @@ async function loadData() {
   });
 
   // 리스트를 묶으면 안됨
-  updateEducationList(educationList);
 
   document.getElementById("cancelBtn").addEventListener("click", () => {
+    e.preventDefault();
     clearEducationForm();
     toggleEducationForm();
   });
@@ -40,6 +48,7 @@ async function loadData() {
     );
     const degree = degreeElement ? degreeElement.value : "";
 
+    // 추가 or 수정??
     if (
       schoolNameInput.value &&
       majorInput.value &&
@@ -88,12 +97,19 @@ async function loadData() {
       const educationItemDiv = document.createElement("div");
       educationItemDiv.className = "education-item";
 
+      //Div에 dataset으로 eduId 추가
+      educationItemDiv.eduId = item.educationId;
+
       const educationText = document.createElement("span");
-      educationText.innerText = `${item.schoolName} ${item.major} (${item.degree}) ${item.startDate}~${item.endDate}`;
+      const date = changeDate(item.startDate, item.endDate);
+      educationText.innerText = `${item.school} ${item.major} (${item.degree}) ${date}`;
       educationItemDiv.appendChild(educationText);
 
       const editBtn = document.createElement("button");
       editBtn.className = "edit-btn btn btn-link";
+      if (canEdit === "false") {
+        addEducationBtn.className += " hidden";
+      }
       editBtn.innerText = "편집";
       editBtn.addEventListener("click", () => {
         editEducation(index);
@@ -103,6 +119,9 @@ async function loadData() {
       const deleteBtn = document.createElement("button");
       deleteBtn.className = "delete-btn btn btn-link";
       deleteBtn.innerText = "삭제";
+      if (canEdit === "false") {
+        addEducationBtn.className += " hidden";
+      }
       deleteBtn.addEventListener("click", () => {
         deleteEducation(index);
         // 삭제 api
@@ -117,7 +136,7 @@ async function loadData() {
   function editEducation(index) {
     educationEditingIndex = index;
     const item = educationList[index];
-    schoolNameInput.value = item.schoolName;
+    schoolNameInput.value = item.school;
     majorInput.value = item.major;
     const degrees = document.getElementsByName("degree");
     degrees.forEach((degree) => {
@@ -152,6 +171,8 @@ async function loadData() {
         educationForm.style.display === "block" ? "none" : "block";
     }
   }
+
+  updateEducationList(educationList);
 }
 
 loadData();
