@@ -55,3 +55,19 @@
 .check-btn-margin {
   margin-left: 5px;
 }
+
+.inline {
+  display: flex;
+  width: 72px;
+}
+
+.wid-72 {
+  width: 72px;
+}
+
+.pw-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
