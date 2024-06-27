@@ -15,6 +15,7 @@ const profileImage = document.getElementById("profileImage");
 const imageURLInput = document.getElementById("imageURLInput");
 const imagePreview = document.getElementById("imagePreview");
 const withdrawBtn = document.getElementById("withdrawBtn");
+const smallBtns = document.getElementById("smallBtns");
 
 // 각 mvp addBtn
 const [addEducationBtn, addAwardBtn, addProjectBtn, addCertificateBtn] =
@@ -51,7 +52,8 @@ const elementsToHide = [
   imageURLInput,
   imagePreview,
   profileButtons,
-  withdrawBtn,
+  // withdrawBtn,
+  smallBtns,
 ];
 
 elementsToHide.forEach(hideElement);
@@ -67,7 +69,8 @@ editProfileBtn.addEventListener("click", () => {
     imageURLInput,
     imagePreview,
     profileButtons,
-    withdrawBtn,
+    // withdrawBtn,
+    smallBtns,
   ];
   elementsToShow.forEach(showElement);
 
@@ -119,7 +122,8 @@ function hideProfileEdit() {
     imageURLInput,
     imagePreview,
     profileButtons,
-    withdrawBtn,
+    // withdrawBtn,
+    smallBtns,
   ];
 
   elementsToHide.forEach(hideElement);
