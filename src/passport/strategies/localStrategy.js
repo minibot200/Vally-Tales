@@ -19,7 +19,7 @@ const local = new LocalStrategy(config, async (email, password, done) => {
         if (!isPasswordCorrect) {
             throw new ValidationError('이메일 또는 비밀번호를 확인해주세요.');
         }
-        done(null, user);
+        done(null, user); // 세션 사용 기준 serializeUser로 이동
     } catch (err) {
         done(err, null);
     }

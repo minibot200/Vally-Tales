@@ -1,5 +1,6 @@
 const Joi = require('joi');
-
+// 유효성 검사 라이브러리
+// express에만 의존하지 않아 다른 기술 스택에서도 사용 가능
 const {
     registerSchema,
     userSchema,
@@ -10,6 +11,8 @@ const {
 } = require('./validationSchemas');
 const { ValidationError } = require('../utils/customError');
 
+// 유효성 검사를 너무 빡세게 하면
+// 자유도가 떨어져 오히려 불편함을 겪는 사용자들이 늘어날 수도 있을 듯...
 const validateRegister = async (req, res, next) => {
     const { email, password, name } = req.body;
     try {
