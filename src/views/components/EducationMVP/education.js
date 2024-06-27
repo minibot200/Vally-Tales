@@ -46,14 +46,6 @@ const handleClickConfirm = (e) => {
     return alert("모든 필드를 입력해주세요!");
   }
 
-  const educationData = {
-    school: schoolNameInput.value,
-    major: majorInput.value,
-    degree: itemDegree,
-    startDate: startDate.value,
-    endDate: endDate.value,
-  };
-
   if (educationEditingIndex === -1) {
     // 이 전에 없으면 추가
     educationList.push({
@@ -81,6 +73,7 @@ const handleClickConfirm = (e) => {
       degree: itemDegree,
       startDate: startDate.value,
       endDate: endDate.value,
+      //educationId 추가
       educationId: educationList[educationEditingIndex].educationId,
     };
     const educationData = {
@@ -89,6 +82,7 @@ const handleClickConfirm = (e) => {
       degree: itemDegree,
       startDate: startDate.value,
       endDate: endDate.value,
+      //educationId 추가
       educationId: educationList[educationEditingIndex].educationId,
     };
 
@@ -241,6 +235,7 @@ function editEducation(index) {
   toggleEducationForm(true);
 }
 
+// 라디오버튼만
 function selectedDegree() {
   const degreeElement = document.querySelector('input[name="degree"]:checked');
 
@@ -281,5 +276,6 @@ async function postEducation(data) {
 
 // 페이지 전부 로드 시 이벤트
 window.addEventListener("load", () => {
+  //get으로 정보를 불러서 화면에 띄우는 것까지
   renderEducationList();
 });
