@@ -24,4 +24,6 @@ router.use('/login', (req, res, next) => {
 
 router.use('/join', serveStatic('join'));
 
+router.use('/pwfind', serveStatic('pwfind'));
+
 module.exports = router;

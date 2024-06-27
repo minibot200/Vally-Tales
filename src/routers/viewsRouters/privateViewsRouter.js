@@ -12,4 +12,6 @@ router.use('/users', serveStatic('users'));
 
 router.use('/users/:userId', serveStatic('user'));
 
+router.use('/pwchange', serveStatic('pwchange'));
+
 module.exports = router;
