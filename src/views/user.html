@@ -14,6 +14,8 @@
       href="https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css"
     />
     <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/join.css" />
+    <link rel="stylesheet" href="styles/modal.css" />
 
     <script type="module" src="components/AwardMVP/award.js"></script>
     <script
@@ -25,6 +27,19 @@
     <script type="module" src="components/ProjectMVP/project.js"></script>
     <script type="module" src="components/navbar.js"></script>
   </head>
+
+  <!-- 회원 탈퇴 모달 팝업 -->
+  <div class="modal">
+    <div class="modal_popup">
+      <h3>정말 탈퇴하시겠어요?</h3>
+      <div class="btn-div">
+        <button type="button" class="modalbtnWh yes_btn">네</button>
+        <button type="button" class="modalbtn close_btn">취소</button>
+      </div>
+    </div>
+  </div>
+  <!-- 회원 탈퇴 모달 팝업 -->
+
   <body>
     <div id="navbar"></div>
     <div class="container mt-5">
@@ -74,7 +89,7 @@
                   id="bioInput"
                   placeholder="자기소개"
                 ></textarea>
-                <div id="profileButtons" class="profile-buttons">
+                <div id="profileButtons" class="profile-buttons mgn-15">
                   <button
                     class="btn btn-primary btn-block"
                     id="profileConfirmBtn"
@@ -88,6 +103,13 @@
                     취소
                   </button>
                 </div>
+                <button
+                  type="button"
+                  class="nav-link small-font"
+                  id="withdrawBtn"
+                >
+                  회원 탈퇴
+                </button>
                 <button class="btn btn-primary btn-block" id="editProfileBtn">
                   Edit
                 </button>
