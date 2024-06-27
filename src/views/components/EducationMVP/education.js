@@ -1,7 +1,6 @@
 // education.js
 import { showElement, hideElement } from "../utils.js";
 import {
-  getUserId,
   changeDate,
   deleteAPI,
   putAPI,
