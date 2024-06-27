@@ -59,7 +59,7 @@ class UserService {
   }
 
   // 페이지네이션 포함 모든 사용자 찾기
-  static async findAll(page = 1, limit = 10) {
+  static async findAll(page = 1, limit = 9) {
     const skip = (page - 1) * limit;
     const users = await UserModel.find({ deletedAt: { $exists: false } })
                                  .skip(skip)

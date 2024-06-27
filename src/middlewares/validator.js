@@ -21,9 +21,9 @@ const validateRegister = async (req, res, next) => {
 }
 
 const validateUser = async (req, res, next) => {
-    const { email, name } = req.body;
+    const { name } = req.body;
     try {
-        await userSchema.validateAsync({ email, name });
+        await userSchema.validateAsync({ name });
         return next();
     } catch(err) {
         return next(new ValidationError(err.message));
