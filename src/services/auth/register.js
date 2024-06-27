@@ -6,7 +6,6 @@ const { ConflictError } = require('../../utils/customError');
 const register = async (req, res, next) => {
     const { email, password, name } = req.body;
     // 이메일 중복 체크
-    // 이메일 인증 버튼을 만들 시 해당 api에 복붙
     try {
         const checkExistEmail = await userModel.findByEmail(email);
         if (checkExistEmail) {

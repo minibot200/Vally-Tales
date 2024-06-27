@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 
 const { ValidationError } = require('../../utils/customError');
 // 회원가입 api에 미들웨어로 끼워 넣기
-
+// 이메일 인증에서 보낸 인증 코드를 검사하는 함수
 const verifyCode = async (req, res, next) => {
     try {
         const { verificationCode } = req.body;

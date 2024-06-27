@@ -1,5 +1,5 @@
 const { InternalServalError } = require('../../utils/customError');
-
+// 로그아웃
 const userLogout = (req, res) => {
     req.logout((err) => {
 		req.session.destroy();

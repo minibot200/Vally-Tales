@@ -11,6 +11,7 @@ router.get('/:userId', getUser);
 // 유저 개인 정보 수정
 router.put('/', validateUser, editUser);
 // 유저 프로필 이미지 수정
+// 현재 사용하지 않음
 // router.put('/image', imageUploader.single('image'), updateImage);
 
 module.exports = router;

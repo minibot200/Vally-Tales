@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 
 const { userModel } = require('../../db/models');
 const { ValidationError } = require('../../utils/customError');
-
+// 비밀번호 변경
 const changePassword = async (req, res, next) => {
     try {
         const { oldPassword, newPassword } = req.body;

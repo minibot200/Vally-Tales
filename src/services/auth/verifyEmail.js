@@ -3,7 +3,9 @@ const bcrypt = require('bcrypt');
 const { userModel } = require('../../db/models');
 const { ConflictError } = require('../../utils/customError');
 const { generateRandomNumbers, sendEmail } = require('../../utils');
-
+// 이메일 인증
+// 인증코드를 이메일로 발송
+// 세션에 인증코드를 저장하고 10분으로 쿠키 만료 시각을 설정
 const verifyEmail = async (req, res, next) => {
     const { email } = req.body;
     try {
