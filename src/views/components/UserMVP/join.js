@@ -11,8 +11,8 @@ const [
   joinInputName,
 ] = document.querySelectorAll("[name=join]");
 const emailReqBtn = document.getElementById("email-reqbtn");
-const emailResBtn = document.getElementById("email-resbtn");
 const emailMessage = document.getElementById("email-check-message");
+const emailCheckNum = document.getElementById("join-emailcheck");
 
 // 폼 제출 시 api 요청
 function onJoinSubmit(event) {
@@ -36,9 +36,10 @@ function onJoinSubmit(event) {
   const joinPassword = joinInputPass1.value;
   const joinName = joinInputName.value;
   const userInfo = { joinEmail, joinPassword, joinName };
+  const verificationCode = emailCheckNum.value;
 
   console.log(userInfo);
-  fetchPostJoin(joinEmail, joinPassword, joinName);
+  fetchPostJoin(joinEmail, joinPassword, joinName, verificationCode);
 }
 
 // 비밀번호 확인 칸 change event
@@ -58,7 +59,7 @@ function checkPassword() {
   return;
 }
 
-function fetchPostJoin(joinEmail, joinPassword, joinName) {
+function fetchPostJoin(joinEmail, joinPassword, joinName, verificationCode) {
   fetch("/api/auth/join", {
     method: "POST",
     headers: {
@@ -68,6 +69,7 @@ function fetchPostJoin(joinEmail, joinPassword, joinName) {
       email: joinEmail,
       password: joinPassword,
       name: joinName,
+      verificationCode: verificationCode,
     }),
   }).then((res) => {
     console.log(res);
@@ -87,12 +89,13 @@ joinForm.addEventListener("submit", onJoinSubmit);
 joinInputPass1.addEventListener("input", checkPassword);
 joinInputPass2.addEventListener("input", checkPassword);
 
-document.getElementById("email-reqbtn").addEventListener("click", async (e) => {
+emailReqBtn.addEventListener("click", async (e) => {
   e.preventDefault();
   const joinEmail = joinInputEmail.value + "@" + joinInputDomain.value;
   const authResult = await requestAuthCode(joinEmail);
-  console.log(authResult);
+  emailMessage.innerText = authResult.message;
 });
+
 const requestAuthCode = (joinEmail) => {
   return fetch("/api/auth/email", {
     method: "POST",
