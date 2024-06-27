@@ -62,7 +62,6 @@ const handleClickConfirm = (e) => {
       startDate: startDate.value,
       endDate: endDate.value,
     };
-    console.log(`추가한 데이터 ${educationData}`);
     //post
     postEducation(educationData);
   } else {
@@ -86,16 +85,12 @@ const handleClickConfirm = (e) => {
       educationId: educationList[educationEditingIndex].educationId,
     };
 
-    console.log(`수정한 데이터 ${educationData}`);
     // put
     putEducation(educationEditingIndex, educationData);
 
     educationEditingIndex = -1;
   }
-  console.log(`${educationList}`);
-  // post / put 요청 함수 안에서 재랜더해서 주석처리
-  //   console.log("재랜더");
-  //   renderEducationList();
+
   clearEducationForm();
   toggleEducationForm();
 };
@@ -105,14 +100,12 @@ const handleClickConfirm = (e) => {
 // 학력 업데이트
 const renderEducationList = async () => {
   // get 실행
-  console.log(`${localStorage.getItem("userId")}의 학력데이터`);
   const userId = localStorage.getItem("userId");
   const educationListData = await getAPI("educations", userId); // response 대기중
   educationList = educationListData;
 
   // (+) btn hidden
   const canEdit = localStorage.getItem("canEdit");
-  console.log(`내가 사용할 canEdit ${canEdit}`);
   if (canEdit === "false") {
     addEducationBtn.className += " hidden";
   }
@@ -142,7 +135,6 @@ const renderEducationList = async () => {
 
     const editBtn = document.createElement("button");
     editBtn.className = "edit-btn btn btn-link";
-    console.log(`이 페이지에 적용된 ${canEdit}`);
     if (canEdit === "false") {
       editBtn.className += " hidden";
     }
@@ -205,11 +197,9 @@ document
 function editEducation(index) {
   educationEditingIndex = index;
   const item = educationList[index];
-  console.log(item);
   schoolNameInput.value = item.school;
   majorInput.value = item.major;
   const degrees = document.getElementsByName("degree");
-  console.log(item.degree);
   degrees.forEach((degree) => {
     degree.checked = degree.value === item.degree;
   });
@@ -232,30 +222,25 @@ function selectedDegree() {
 async function deleteEducation(index) {
   // async 추가
   // deleteEducationAPI 호출
-  console.log(educationList[index]);
   const result = await deleteAPI(
     "educations",
     educationList[index].educationId
   );
   educationList.splice(index, 1);
-  console.log("delete 요청 후 재랜더");
   renderEducationList();
 }
 
 async function putEducation(index, data) {
-  console.log(educationList[index]);
   const result = await putAPI(
     "educations",
     educationList[index].educationId,
     data
   );
-  console.log("put 요청 후 재랜더");
   renderEducationList();
 }
 
 async function postEducation(data) {
   const result = await postAPI("educations", data);
-  console.log("post 요청 후 재랜더");
   renderEducationList();
 }
 

@@ -98,10 +98,9 @@ async function updateAwardList() {
   awardListDiv.innerHTML = "";
 
   const canEdit = localStorage.getItem("canEdit");
-  console.log(`내가 사용할 canEdit ${canEdit}`);
-  if (canEdit === "false") {
-    addAwardBtn.className += " hidden";
-  }
+  // if (canEdit === "false") {
+  //   addAwardBtn.className += " hidden";
+  // }
 
   const fragment = document.createDocumentFragment();
 
