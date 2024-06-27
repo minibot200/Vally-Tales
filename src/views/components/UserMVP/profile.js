@@ -14,6 +14,7 @@ const bioText = document.getElementById("bioText");
 const profileImage = document.getElementById("profileImage");
 const imageURLInput = document.getElementById("imageURLInput");
 const imagePreview = document.getElementById("imagePreview");
+const withdrawBtn = document.getElementById("withdrawBtn");
 
 // 각 mvp addBtn
 const [addEducationBtn, addAwardBtn, addProjectBtn, addCertificateBtn] =
@@ -37,7 +38,7 @@ async function loadData(userId) {
   nameText.innerText = userData.name; // 수정된 부분
   emailText.innerText = userData.email; // 수정된 부분
   bioText.innerText = userData.description; // 수정된 부분
-  profileImage.src = userData.profileImageUrl
+  profileImage.src = userData.imageUrl
     ? userData.profileImageUrl
     : "./images/profile.png"; // 수정된 부분
 }
@@ -50,6 +51,7 @@ const elementsToHide = [
   imageURLInput,
   imagePreview,
   profileButtons,
+  withdrawBtn,
 ];
 
 elementsToHide.forEach(hideElement);
@@ -65,6 +67,7 @@ editProfileBtn.addEventListener("click", () => {
     imageURLInput,
     imagePreview,
     profileButtons,
+    withdrawBtn,
   ];
   elementsToShow.forEach(showElement);
 
@@ -92,8 +95,8 @@ document
     const userData = {
       userId: userId,
       name: nameInput.value,
-      // email: emailInput.value,
       description: bioInput.value,
+      imageUrl: imageURLInput.value,
     };
 
     await updateUser(userId, userData); // 사용자 정보 업데이트
@@ -116,6 +119,7 @@ function hideProfileEdit() {
     imageURLInput,
     imagePreview,
     profileButtons,
+    withdrawBtn,
   ];
 
   elementsToHide.forEach(hideElement);
@@ -158,3 +162,34 @@ const updateUser = async (userId, userData) => {
     console.error("Error:", error);
   }
 };
+
+const modal = document.querySelector(".modal");
+const modalyes = document.querySelector(".yes_btn");
+const modalClose = document.querySelector(".close_btn");
+
+modalyes.addEventListener("click", async (e) => {
+  e.preventDefault();
+  try {
+    const response = await fetch(`/api/auth`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      return (window.location.href = response.url);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+});
+
+//열기 버튼을 눌렀을 때 모달팝업이 열림
+withdrawBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  //'on' class 추가
+  modal.classList.add("on");
+});
+//닫기 버튼을 눌렀을 때 모달팝업이 닫힘
+modalClose.addEventListener("click", function (e) {
+  e.preventDefault();
+  //'on' class 제거
+  modal.classList.remove("on");
+});
