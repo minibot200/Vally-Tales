@@ -97,6 +97,12 @@ async function updateAwardList() {
   const awardListDiv = document.getElementById("awardList");
   awardListDiv.innerHTML = "";
 
+  const canEdit = localStorage.getItem("canEdit");
+  console.log(`내가 사용할 canEdit ${canEdit}`);
+  if (canEdit === "false") {
+    addAwardBtn.className += " hidden";
+  }
+
   const fragment = document.createDocumentFragment();
 
   awardList.forEach((item, index) => {
@@ -112,6 +118,9 @@ async function updateAwardList() {
 
     const editBtn = document.createElement("button");
     editBtn.className = "edit-btn btn btn-link";
+    if (canEdit === "false") {
+      editBtn.className += " hidden";
+    }
     editBtn.innerText = "편집";
     editBtn.addEventListener("click", () => {
       editAward(index);
@@ -120,6 +129,9 @@ async function updateAwardList() {
 
     const deleteBtn = document.createElement("button");
     deleteBtn.className = "delete-btn btn btn-link";
+    if (canEdit === "false") {
+      deleteBtn.className += " hidden";
+    }
     deleteBtn.innerText = "삭제";
     deleteBtn.addEventListener("click", () => {
       deleteAward(index);

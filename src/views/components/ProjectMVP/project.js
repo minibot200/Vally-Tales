@@ -115,6 +115,9 @@ async function updateProjectList() {
     console.log(`이 페이지에 적용된 ${canEdit}`);
     const editBtn = document.createElement("button");
     editBtn.className = "edit-btn btn btn-link";
+    if (canEdit === "false") {
+      editBtn.className += " hidden";
+    }
     editBtn.innerText = "편집";
     editBtn.addEventListener("click", () => {
       editProject(index);
@@ -183,7 +186,7 @@ async function postProject(data) {
 }
 
 // 페이지 전부 로드 시 이벤트
-window.addEventListener("load", () => {
+document.addEventListener("DOMContentLoaded", () => {
   //get으로 정보를 불러서 화면에 띄우는 것까지
   updateProjectList();
 });
