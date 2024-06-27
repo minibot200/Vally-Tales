@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (!user.description) {
       user.description = "아직 설명이 없어요!";
     } else if (!user.imageUrl) {
-      user.imageUrl = "../../images/profile.png";
+      user.imageUrl = "./images/profile.png";
     }
 
     card.innerHTML = `
