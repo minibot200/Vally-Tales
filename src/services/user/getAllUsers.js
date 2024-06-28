@@ -10,6 +10,7 @@ const getAllUsers = async (req, res) => {
         email: user.email,
         description: user.description,
         userId: user.userId,
+        imageUrl: user.imageUrl,
     }));
     return res.json(data);
 }

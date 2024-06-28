@@ -14,6 +14,7 @@ const getUser = async (req, res, next) => {
             name: foundUser.name,
             email: foundUser.email,
             description: foundUser.description,
+            imageUrl: foundUser.imageUrl,
             canEdit,
         };
         return res.json(data);
