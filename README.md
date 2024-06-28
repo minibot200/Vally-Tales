@@ -11,8 +11,9 @@
   
   
 # 기술 스택
-Front-end : <img alt="Html" src ="https://img.shields.io/badge/HTML5-E34F26.svg?&style=for-the-badge&logo=HTML5&logoColor=white"/> <img alt="Css" src ="https://img.shields.io/badge/CSS3-1572B6.svg?&style=for-the-badge&logo=CSS3&logoColor=white"/>   <img src="https://img.shields.io/badge/express.js-61DAFB?style=for-the-badge&logo=express&logoColor=black"/><img alt="JavaScript" src="https://camo.githubusercontent.com/0d61458680d0251da6e466fb5e30a5650d15d0239c68482920d00de83961daa4/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4a617661536372696970742d4637444631452e7376673f267374796c653d666f722d7468652d6261646765266c6f676f3d4a617661536372697074266c6f676f436f6c6f723d626c61636b" data-canonical-src="https://img.shields.io/badge/JavaScriipt-F7DF1E.svg?&amp;style=for-the-badge&amp;logo=JavaScript&amp;logoColor=black" style="max-width: 100%;">  
-Back-end  : <img src="https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white"> <img src="https://img.shields.io/badge/mongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=white">
+Front-end : <img alt="Html" src ="https://img.shields.io/badge/HTML5-E34F26.svg?&style=for-the-badge&logo=HTML5&logoColor=white"/> <img alt="Css" src ="https://img.shields.io/badge/CSS3-1572B6.svg?&style=for-the-badge&logo=CSS3&logoColor=white"/>  <img alt="JavaScript" src="https://camo.githubusercontent.com/0d61458680d0251da6e466fb5e30a5650d15d0239c68482920d00de83961daa4/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4a617661536372696970742d4637444631452e7376673f267374796c653d666f722d7468652d6261646765266c6f676f3d4a617661536372697074266c6f676f436f6c6f723d626c61636b" data-canonical-src="https://img.shields.io/badge/JavaScriipt-F7DF1E.svg?&amp;style=for-the-badge&amp;logo=JavaScript&amp;logoColor=black" style="max-width: 100%;">
+
+Back-end  : <img src="https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white"> <img src="https://img.shields.io/badge/mongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=white">  <img src="https://img.shields.io/badge/express.js-61DAFB?style=for-the-badge&logo=express&logoColor=black"/> 
   
 # 형상관리  
   <img src="https://img.shields.io/badge/gitlab-61DAFB?style=for-the-badge&logo=gitlab&logoColor=black"/>  
