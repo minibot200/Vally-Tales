@@ -1,4 +1,4 @@
-import { fetchPostLogout } from "../logout.js";
+import { fetchPostLogout } from "./logout.js";
 import { fetchGetInfo } from "../apiRequest.js";
 // 새 코드
 document.addEventListener("DOMContentLoaded", async function () {

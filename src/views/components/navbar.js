@@ -1,4 +1,4 @@
-import { fetchPostLogout } from "./logout.js";
+import { fetchPostLogout } from "./UserMVP/logout.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   const navbarContainer = document.getElementById("navbar");
