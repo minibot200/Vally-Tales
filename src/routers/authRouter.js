@@ -20,7 +20,8 @@ router.post('/join', validateRegister, verifyCode, register);
 router.post('/email', validateEmail, verifyEmail );
 
 // 비밀번호 찾기
-router.post('/password', findPassword);
+// 비활성화
+// router.post('/password', findPassword);
 
 // 로그인
 router.post('/login', (req, res, next) => {
