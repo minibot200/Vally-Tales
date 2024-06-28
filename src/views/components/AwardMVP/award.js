@@ -237,8 +237,5 @@ const deleteAwardAPI = async (awardId) => {
 
 // 페이지 로드 시 수상 목록 불러오기
 window.addEventListener("load", async () => {
-  const userId = localStorage.getItem("userId");
-  const awards = await getAwards(userId);
-  awardList = awards;
   updateAwardList();
 });
