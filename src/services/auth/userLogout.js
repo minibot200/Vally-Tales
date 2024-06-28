@@ -6,7 +6,7 @@ const userLogout = (req, res) => {
 		if (err) {
 			throw new InternalServalError('로그아웃 중 문제가 발생하였습니다.');
 		} else {
-			return res.redirect('/');
+			return res.status(204).end();
 		}
 	});
 }
