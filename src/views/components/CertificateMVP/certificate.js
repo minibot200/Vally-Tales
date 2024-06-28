@@ -158,9 +158,12 @@ function editCertificate(index) {
   certificateNameInput.value = item.name;
   certificateOrganizationInput.value = item.organization;
   const issuing = changeDate(item.issuingDate);
-  const exp = changeDate(item.expirationDate);
   certificateDateInput.value = issuing;
-  certificateExpInput.value = exp;
+  if (item.expirationDate) {
+    const exp = changeDate(item.expirationDate);
+    certificateExpInput.value = exp;
+  }
+
   toggleCertificateForm(true);
 }
 
