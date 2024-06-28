@@ -13,12 +13,6 @@ document
     const confirmPassword = document.getElementById("confirmPassword").value;
     const messageDiv = document.getElementById("message");
 
-    if (oldPassword === newPassword) {
-      messageDiv.textContent = "이전 비밀번호와 다른 비밀번호를 입력해주세요.";
-      messageDiv.style.color = "gray";
-      return;
-    }
-
     if (oldPassword && newPassword && confirmPassword) {
     } else {
       messageDiv.textContent = "모든 필드를 입력해 주세요.";
@@ -50,18 +44,14 @@ document
       }),
     })
       .then((response) => {
-        if (response.redirected) {
+        if (response.status === 204) {
           alert("비밀번호 변경에 성공했습니다!");
-          console.log(response);
-          window.location.href = response.url;
+          window.location.href = "/";
           return;
         } else {
           messageDiv.textContent = "비밀번호가 틀렸습니다.";
           messageDiv.style.color = "gray";
         }
       })
-      .catch((error) => {
-        console.log(response.error);
-        // messageDiv.textContent = "비밀번호 변경 중 에러가 발생했습니다.";
-      });
+      .catch((error) => (res) => null);
   });

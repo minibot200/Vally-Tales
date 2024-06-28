@@ -178,12 +178,13 @@ const modalClose = document.querySelector(".close_btn");
 
 modalyes.addEventListener("click", async (e) => {
   e.preventDefault();
+  localStorage.clear();
   try {
     const response = await fetch(`/api/auth`, {
       method: "DELETE",
     });
-    if (response.ok) {
-      window.location.href = response.url;
+    if (response.status === 204) {
+      window.location.href = "/";
       return;
     }
   } catch (error) {
