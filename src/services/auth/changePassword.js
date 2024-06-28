@@ -18,7 +18,7 @@ const changePassword = async (req, res, next) => {
         await userModel.updateById(req.user.userId, { password: hashedPassword });
         await userModel.updateResetFalse(req.user.userId);
         
-        return res.redirect('/');
+        return res.status(204).end();
     } catch(err) {
         return next(err);
     }
