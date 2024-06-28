@@ -66,7 +66,6 @@ ID : test@test.com
 PW : test  
 
 # API Description  
-→ API 명세서 바로가기r=white"/>  
-<a href="https://docs.google.com/spreadsheets/d/1zf1ba67KJeYdKVzmxcpR9E7Rf_9xZpqaGcunBZAFwtM/edit?gid=0#gid=0">API 명세서 바로가기기</a>
+→ <a href="https://docs.google.com/spreadsheets/d/1zf1ba67KJeYdKVzmxcpR9E7Rf_9xZpqaGcunBZAFwtM/edit?gid=0#gid=0">API 명세서 바로가기</a>
   
 </div>
