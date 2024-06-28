@@ -21,10 +21,10 @@ let certificateList = [];
 
 let certificateEditingIndex = -1;
 
-const canEdit = await localStorage.getItem("canEdit");
-if (canEdit === "false") {
-  addCertificateBtn.className += " hidden";
-}
+const canEdit = localStorage.getItem("canEdit");
+// if (canEdit === "false") {
+//   addCertificateBtn.className += " hidden";
+// }
 
 const initializeCertificateForm = () => {
   clearCertificateForm();
@@ -96,10 +96,10 @@ async function renderCertificateList() {
   const certificateListData = await getAPI("certificates", userId);
   certificateList = certificateListData;
 
-  const canEdit = localStorage.getItem("canEdit");
-  if (canEdit === "false") {
-    addCertificateBtn.className += " hidden";
-  }
+  // const canEdit = localStorage.getItem("canEdit");
+  // if (canEdit === "false") {
+  //   addCertificateBtn.className += " hidden";
+  // }
 
   const fragment = document.createDocumentFragment();
   const certificateListDiv = document.getElementById("certificateList");

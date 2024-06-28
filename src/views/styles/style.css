@@ -121,3 +121,8 @@ h2 {
 .none {
   display: none;
 }
+
+.small-font {
+  font-size: 13px;
+  color: rgb(199, 199, 199);
+}

@@ -13,8 +13,7 @@ const [
 // 로그인 버튼 submit event
 function onLoginSubmit(event) {
   event.preventDefault();
-  console.log("로그인 제출");
-  console.log(loginInputPassword.value);
+
   const loginEmail = loginInputEmail.value + "@" + loginInputDomain.value;
   const loginPassword = loginInputPassword.value;
 
@@ -23,8 +22,6 @@ function onLoginSubmit(event) {
   } else if (loginPassword === "") {
     return alert("비밀번호를 입력해주세요!");
   }
-  console.log(loginEmail);
-  console.log(loginPassword);
 
   // api POST 요청
   fetchPostLogin(loginEmail, loginPassword);
@@ -41,9 +38,7 @@ function fetchPostLogin(loginEmail, loginPassword) {
       password: loginPassword,
     }),
   }).then((res) => {
-    console.log(res);
     if (res.redirected) {
-      console.log("유저페이지로 이동");
       window.location.href = res.url;
       return;
     } else if (res.status === 400) {

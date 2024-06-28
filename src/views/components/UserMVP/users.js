@@ -6,13 +6,11 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // fetch 함수를 사용하여 데이터 가져오기
   const users = await fetchGetInfo("users");
-  console.log(users);
 
   // 카드 요소를 생성
   users.forEach((user) => {
     const card = document.createElement("div");
     card.className = "col-md-4";
-    // console.log(user);
 
     if (!user.description) {
       user.description = "아직 설명이 없어요!";
@@ -35,7 +33,3 @@ document.addEventListener("DOMContentLoaded", async function () {
     userCardsContainer.appendChild(card);
   });
 });
-
-// 로그아웃
-// const logoutTag = document.getElementById("logout");
-// logoutTag.addEventListener("click", fetchPostLogout);

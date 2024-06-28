@@ -83,14 +83,12 @@ document.getElementById("projectConfirmBtn").addEventListener("click", (e) => {
 
 async function updateProjectList() {
   //get 실행
-  console.log(`${localStorage.getItem("userId")}의 프로젝트데이터`);
   const userId = localStorage.getItem("userId");
   const projectListData = await getAPI("projects", userId); // response 대기중
   projectList = projectListData;
 
   // (+) btn hidden
   const canEdit = localStorage.getItem("canEdit");
-  console.log(`내가 사용할 canEdit ${canEdit}`);
   if (canEdit === "false") {
     addProjectBtn.className += " hidden";
   }
@@ -112,7 +110,6 @@ async function updateProjectList() {
     projectItemDiv.appendChild(projectText);
 
     //편집, 삭제 버튼 생성
-    console.log(`이 페이지에 적용된 ${canEdit}`);
     const editBtn = document.createElement("button");
     editBtn.className = "edit-btn btn btn-link";
     if (canEdit === "false") {
@@ -173,15 +170,12 @@ async function deleteProject(index) {
 }
 
 async function putProject(index, data) {
-  console.log(projectList[index]);
   const result = await putAPI("projects", projectList[index].projectId, data);
-  console.log("put 요청 후 재랜더");
   updateProjectList();
 }
 
 async function postProject(data) {
   const result = await postAPI("projects", data);
-  console.log("post 요청 후 재랜더");
   updateProjectList();
 }
 

@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>User List</title>
+    <title>Valley-Tales</title>
+    <link rel="shortcut icon" href="./images/icon.ico" />
     <!-- Bootstrap CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -14,6 +15,8 @@
       href="https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css"
     />
     <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/join.css" />
+    <link rel="stylesheet" href="styles/modal.css" />
 
     <script type="module" src="components/AwardMVP/award.js"></script>
     <script
@@ -25,6 +28,19 @@
     <script type="module" src="components/ProjectMVP/project.js"></script>
     <script type="module" src="components/navbar.js"></script>
   </head>
+
+  <!-- 회원 탈퇴 모달 팝업 -->
+  <div class="modal">
+    <div class="modal_popup">
+      <h3>정말 탈퇴하시겠어요?</h3>
+      <div class="btn-div">
+        <button type="button" class="modalbtnWh yes_btn">네</button>
+        <button type="button" class="modalbtn close_btn">취소</button>
+      </div>
+    </div>
+  </div>
+  <!-- 회원 탈퇴 모달 팝업 -->
+
   <body>
     <div id="navbar"></div>
     <div class="container mt-5">
@@ -74,7 +90,7 @@
                   id="bioInput"
                   placeholder="자기소개"
                 ></textarea>
-                <div id="profileButtons" class="profile-buttons">
+                <div id="profileButtons" class="profile-buttons mgn-15">
                   <button
                     class="btn btn-primary btn-block"
                     id="profileConfirmBtn"
@@ -88,6 +104,25 @@
                     취소
                   </button>
                 </div>
+                <div class="inline" id="smallBtns">
+                  <button
+                    type="button"
+                    class="nav-link small-font wid-72"
+                    id="withdrawBtn"
+                  >
+                    회원 탈퇴
+                  </button>
+
+                  <button
+                    type="button"
+                    class="nav-link small-font wid-72"
+                    id="pw-change-btn"
+                    onclick="location.href='pwchange.html'"
+                  >
+                    비밀번호 변경
+                  </button>
+                </div>
+
                 <button class="btn btn-primary btn-block" id="editProfileBtn">
                   Edit
                 </button>
@@ -104,7 +139,11 @@
                   class="card-body d-flex justify-content-between align-items-center"
                 >
                   <h5 class="card-title">학력</h5>
-                  <button class="btn btn-primary btn-sm" id="addEducationBtn">
+                  <button
+                    class="btn btn-primary btn-sm"
+                    name="addBtn"
+                    id="addEducationBtn"
+                  >
                     +
                   </button>
                 </div>
@@ -170,6 +209,7 @@
                   <button
                     class="btn btn-primary btn-sm"
                     id="award-form_addAwardBtn"
+                    name="addBtn"
                   >
                     +
                   </button>
@@ -218,7 +258,11 @@
                   class="card-body d-flex justify-content-between align-items-center"
                 >
                   <h5 class="card-title">프로젝트</h5>
-                  <button class="btn btn-primary btn-sm" id="addProjectBtn">
+                  <button
+                    class="btn btn-primary btn-sm"
+                    name="addBtn"
+                    id="addProjectBtn"
+                  >
                     +
                   </button>
                 </div>
@@ -271,7 +315,11 @@
                   class="card-body d-flex justify-content-between align-items-center"
                 >
                   <h5 class="card-title">자격증</h5>
-                  <button class="btn btn-primary btn-sm" id="addCertificateBtn">
+                  <button
+                    class="btn btn-primary btn-sm"
+                    id="addCertificateBtn"
+                    name="addBtn"
+                  >
                     +
                   </button>
                 </div>

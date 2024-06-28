@@ -14,29 +14,32 @@ const bioText = document.getElementById("bioText");
 const profileImage = document.getElementById("profileImage");
 const imageURLInput = document.getElementById("imageURLInput");
 const imagePreview = document.getElementById("imagePreview");
+const withdrawBtn = document.getElementById("withdrawBtn");
+const smallBtns = document.getElementById("smallBtns");
+
+// 각 mvp addBtn
+const [addEducationBtn, addAwardBtn, addProjectBtn, addCertificateBtn] =
+  document.querySelectorAll("[name=addBtn]");
 
 //userId path에서 추출
 const userId = getUserId();
 localStorage.removeItem("userId");
 localStorage.setItem("userId", userId);
-console.log(localStorage.getItem("userId"));
 
 async function loadData(userId) {
   //get api 호출 후 data 저장
   const userData = await loadProfileData(userId);
-  console.log(`누구의 데이터를 로드? ${userId}`);
   const canEdit = userData.canEdit;
 
   //로컬에 canEdit 저장
   localStorage.removeItem("canEdit");
   localStorage.setItem("canEdit", canEdit);
-  console.log(`로컬에 저장 ${localStorage.getItem("canEdit")}`);
 
   // 불러온 사용자 데이터를 UI에 반영
   nameText.innerText = userData.name; // 수정된 부분
   emailText.innerText = userData.email; // 수정된 부분
   bioText.innerText = userData.description; // 수정된 부분
-  profileImage.src = userData.profileImageUrl
+  profileImage.src = userData.imageUrl
     ? userData.profileImageUrl
     : "./images/profile.png"; // 수정된 부분
 }
@@ -49,6 +52,8 @@ const elementsToHide = [
   imageURLInput,
   imagePreview,
   profileButtons,
+  // withdrawBtn,
+  smallBtns,
 ];
 
 elementsToHide.forEach(hideElement);
@@ -64,6 +69,8 @@ editProfileBtn.addEventListener("click", () => {
     imageURLInput,
     imagePreview,
     profileButtons,
+    // withdrawBtn,
+    smallBtns,
   ];
   elementsToShow.forEach(showElement);
 
@@ -91,8 +98,8 @@ document
     const userData = {
       userId: userId,
       name: nameInput.value,
-      // email: emailInput.value,
       description: bioInput.value,
+      imageUrl: imageURLInput.value,
     };
 
     await updateUser(userId, userData); // 사용자 정보 업데이트
@@ -115,6 +122,8 @@ function hideProfileEdit() {
     imageURLInput,
     imagePreview,
     profileButtons,
+    // withdrawBtn,
+    smallBtns,
   ];
 
   elementsToHide.forEach(hideElement);
@@ -126,10 +135,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   await loadData(userId);
   const canEdit = await localStorage.getItem("canEdit");
 
-  console.log(`내가 비교한 canEdit ${canEdit}`);
   if (canEdit === "false") {
     editProfileBtn.className += " hidden";
     profileButtons.className += " hidden";
+    addEducationBtn.className += " hidden";
+    addAwardBtn.className += " hidden";
+    addProjectBtn.className += " hidden";
+    addCertificateBtn.className += " hidden";
   }
 });
 
@@ -149,10 +161,39 @@ const updateUser = async (userId, userData) => {
       throw new Error("Failed to update user data");
     }
     const result = await response.json();
-    console.log("User updated:", result);
     alert("프로필 변경 성공!");
   } catch (error) {
     console.error("Error:", error);
-    console.log(response);
   }
 };
+
+const modal = document.querySelector(".modal");
+const modalyes = document.querySelector(".yes_btn");
+const modalClose = document.querySelector(".close_btn");
+
+modalyes.addEventListener("click", async (e) => {
+  e.preventDefault();
+  try {
+    const response = await fetch(`/api/auth`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      return (window.location.href = response.url);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+});
+
+//열기 버튼을 눌렀을 때 모달팝업이 열림
+withdrawBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  //'on' class 추가
+  modal.classList.add("on");
+});
+//닫기 버튼을 눌렀을 때 모달팝업이 닫힘
+modalClose.addEventListener("click", function (e) {
+  e.preventDefault();
+  //'on' class 제거
+  modal.classList.remove("on");
+});
