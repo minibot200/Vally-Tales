@@ -105,10 +105,10 @@ const renderEducationList = async () => {
   educationList = educationListData;
 
   // (+) btn hidden
-  const canEdit = localStorage.getItem("canEdit");
-  if (canEdit === "false") {
-    addEducationBtn.className += " hidden";
-  }
+  // const canEdit = localStorage.getItem("canEdit");
+  // if (canEdit === "false") {
+  //   addEducationBtn.className += " hidden";
+  // }
 
   const fragment = document.createDocumentFragment();
   const educationListDiv = document.getElementById("educationList");
@@ -132,7 +132,7 @@ const renderEducationList = async () => {
 
     // educationText.innerText = `${item.school} ${item.major} (${item.degree}) ${date}`;
     educationItemDiv.appendChild(educationText);
-
+    const canEdit = localStorage.getItem("canEdit");
     const editBtn = document.createElement("button");
     editBtn.className = "edit-btn btn btn-link";
     if (canEdit === "false") {

@@ -97,7 +97,7 @@ async function updateAwardList() {
   const awardListDiv = document.getElementById("awardList");
   awardListDiv.innerHTML = "";
 
-  const canEdit = localStorage.getItem("canEdit");
+  // const canEdit = localStorage.getItem("canEdit");
   // if (canEdit === "false") {
   //   addAwardBtn.className += " hidden";
   // }
@@ -114,7 +114,7 @@ async function updateAwardList() {
     ${item.date.substr(0, 10)}
     `; // 날짜 필드 이름 수정
     awardItemDiv.appendChild(awardText);
-
+    const canEdit = localStorage.getItem("canEdit");
     const editBtn = document.createElement("button");
     editBtn.className = "edit-btn btn btn-link";
     if (canEdit === "false") {

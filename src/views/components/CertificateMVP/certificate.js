@@ -20,8 +20,12 @@ const certificateExpInput = document.getElementById("ExpDate");
 let certificateList = [];
 
 let certificateEditingIndex = -1;
+addCertificateBtn.addEventListener("click", () => {
+  certificateEditingIndex = -1;
+  initializeCertificateForm();
+});
 
-const canEdit = localStorage.getItem("canEdit");
+// const canEdit = localStorage.getItem("canEdit");
 // if (canEdit === "false") {
 //   addCertificateBtn.className += " hidden";
 // }
@@ -30,11 +34,6 @@ const initializeCertificateForm = () => {
   clearCertificateForm();
   toggleCertificateForm();
 };
-
-addCertificateBtn.addEventListener("click", () => {
-  certificateEditingIndex = -1;
-  initializeCertificateForm();
-});
 
 document
   .getElementById("certificateCancelBtn")
@@ -124,7 +123,7 @@ async function renderCertificateList() {
           `;
     }
     certificateItemDiv.appendChild(certificateText);
-
+    const canEdit = localStorage.getItem("canEdit");
     const editBtn = document.createElement("button");
     editBtn.className = "edit-btn btn btn-link";
     if (canEdit === "false") {

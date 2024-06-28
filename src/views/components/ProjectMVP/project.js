@@ -88,10 +88,10 @@ async function updateProjectList() {
   projectList = projectListData;
 
   // (+) btn hidden
-  const canEdit = localStorage.getItem("canEdit");
-  if (canEdit === "false") {
-    addProjectBtn.className += " hidden";
-  }
+  // const canEdit = localStorage.getItem("canEdit");
+  // if (canEdit === "false") {
+  //   addProjectBtn.className += " hidden";
+  // }
 
   const fragment = document.createDocumentFragment();
   const projectListDiv = document.getElementById("projectList");
@@ -110,6 +110,7 @@ async function updateProjectList() {
     projectItemDiv.appendChild(projectText);
 
     //편집, 삭제 버튼 생성
+    const canEdit = localStorage.getItem("canEdit");
     const editBtn = document.createElement("button");
     editBtn.className = "edit-btn btn btn-link";
     if (canEdit === "false") {
