@@ -1,6 +1,4 @@
-# web_project
-
-# ekdlakdl12_NET
+# Valley-Tales
 
 <div align="center">
      
@@ -8,20 +6,24 @@
 
 </div>
 
-## 프로젝트명 미정
+## 프로젝트명
 
-미정
+Valley-Tales
 
 ## 개발팀 소개
 
-미정
+팀장: 황솜귤
+
+프론트엔드 : 황솜귤 김민지 임형선
+벡엔드: 김재영 최준영
 
 ## 프로젝트 소개
 
-미정
+포트폴리오 공유 사이트
 
 
 ## Stacks
+     
      
 ## Environment
 
