@@ -16,7 +16,7 @@ Front-end : <img alt="Html" src ="https://img.shields.io/badge/HTML5-E34F26.svg?
 Back-end  : <img src="https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white"> <img src="https://img.shields.io/badge/mongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=white">  <img src="https://img.shields.io/badge/express.js-000000?style=for-the-badge&logo=express&logoColor=white"/> 
   
 # 형상관리  
-  <img src="https://img.shields.io/badge/gitlab-61DAFB?style=for-the-badge&logo=gitlab&logoColor=black"/>  
+  <img src="https://img.shields.io/badge/gitlab-FC6D26?style=for-the-badge&logo=gitlab&logoColor=black"/>  
   
 # 팀 멤버
 | 담당 업무 | 이름 |
