@@ -40,7 +40,7 @@ async function loadData(userId) {
   emailText.innerText = userData.email; // 수정된 부분
   bioText.innerText = userData.description; // 수정된 부분
   profileImage.src = userData.imageUrl
-    ? userData.profileImageUrl
+    ? userData.imageUrl
     : "./images/profile.png"; // 수정된 부분
 }
 
@@ -62,6 +62,8 @@ editProfileBtn.addEventListener("click", () => {
   nameInput.value = nameText.innerText;
   // emailInput.value = emailText.innerText;
   bioInput.value = bioText.innerText;
+  imageURLInput.value = profileImage.src;
+
   const elementsToShow = [
     nameInput,
     // emailInput,
@@ -81,7 +83,10 @@ document
   .getElementById("profileConfirmBtn")
   .addEventListener("click", async () => {
     // async 추가
-    if (nameInput.value) {
+    if (nameInput.value.length > 12) {
+      alert("이름은 12자 이하만 가능합니다!");
+      return;
+    } else if (nameInput.value) {
       nameText.innerText = nameInput.value;
     }
     // if (emailInput.value) {
@@ -178,7 +183,8 @@ modalyes.addEventListener("click", async (e) => {
       method: "DELETE",
     });
     if (response.ok) {
-      return (window.location.href = response.url);
+      window.location.href = response.url;
+      return;
     }
   } catch (error) {
     console.error("Error:", error);

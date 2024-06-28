@@ -45,8 +45,7 @@ function onJoinSubmit(event) {
 // 비밀번호 확인 칸 change event
 function checkPassword() {
   if (joinInputPass1.value.length < 4) {
-    passwordMessage.innerText =
-      "비밀번호가 너무 짧습니다. 4글자 이상 입력해주세요.";
+    passwordMessage.innerText = "4글자 이상 입력해주세요.";
     passwordMessage.style.color = "red";
   } else if (joinInputPass1.value !== joinInputPass2.value) {
     passwordMessage.innerText = "비밀번호가 일치하지 않습니다.";
