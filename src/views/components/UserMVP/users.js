@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     card.innerHTML = `
             <div class="card">
-                <img src="${user.imageUrl}" class="card-img-top" alt="${user.name}">
+                <img src="${user.imageUrl}" onerror="this.src='./images/profile.png';" class="card-img-top" alt="${user.name}">
                 <div class="card-body">
                     <h5 class="card-title">${user.name}</h5>
                     <p class="card-text">${user.email}</p>
