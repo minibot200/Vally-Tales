@@ -26,8 +26,9 @@ const userId = getUserId();
 localStorage.removeItem("userId");
 localStorage.setItem("userId", userId);
 
+//get 으로 불러온 정보 화면에 뿌리기
 async function loadData(userId) {
-  //get api 호출 후 data 저장
+  //get
   const userData = await loadProfileData(userId);
   const canEdit = userData.canEdit;
 
@@ -39,9 +40,10 @@ async function loadData(userId) {
   nameText.innerText = userData.name; // 수정된 부분
   emailText.innerText = userData.email; // 수정된 부분
   bioText.innerText = userData.description; // 수정된 부분
-  profileImage.src = userData.imageUrl
-    ? userData.imageUrl
-    : "./images/profile.png"; // 수정된 부분
+  if (!userData.imageUrl) {
+    userData.imageUrl = "./images/profile.png";
+  }
+  profileImage.src = userData.imageUrl;
 }
 
 // 초기 로드 시 편집 섹션 숨기기
@@ -79,6 +81,7 @@ editProfileBtn.addEventListener("click", () => {
   hideElement(editProfileBtn);
 });
 
+// 편집 확인 버튼 동작
 document
   .getElementById("profileConfirmBtn")
   .addEventListener("click", async () => {
@@ -98,13 +101,21 @@ document
     if (imageURLInput.value) {
       profileImage.src = imageURLInput.value;
     }
+    // 이때 이미지 엑박 뜨면 onerror 동작
 
     // PUT 요청 추가
+    // img onerror 함수 동작 후 기본이미지로 대체된 url이 userData에 저장되게 하려면 어떻게 해야 할까...
+    // img onerror handleImgError 함수가 동작하는 것 보다 put 요청이 빠름.
+    // 편집 확인 버튼 클릭 -> 변경사항 프론트에 먼저 반영 : img onerror (alert, 기본이미지로 변경)
+    //                    -> (onerror처리 전 오류url로) put, DB와 프론트가 싱크 맞지 않음
+    //                    -> 새로고침 시 (오류 url로) 화면 재로드하면서 onerror 한번 더 일어나는 상황
+    // 이미지 에러가 떠서 이벤트가 종료되고 put이 안 되면 작성한 이름과 설명은 날아가기 때문에
+    // 기본이미지 url을 저장하거나 빈칸으로 저장하게 하면 어떨까 싶습니다.
     const userData = {
       userId: userId,
       name: nameInput.value,
       description: bioInput.value,
-      imageUrl: imageURLInput.value,
+      imageUrl: imageURLInput.value, // input url을 데이터에 바로 반영되는데 onerror로 이미지가 대체되는 것 보다 이게 빠릅니다...
     };
 
     await updateUser(userId, userData); // 사용자 정보 업데이트
@@ -166,7 +177,7 @@ const updateUser = async (userId, userData) => {
       throw new Error("Failed to update user data");
     }
     const result = await response.json();
-    alert("프로필 변경 성공!");
+    // alert("프로필 변경 성공!");
   } catch (error) {
     console.error("Error:", error);
   }

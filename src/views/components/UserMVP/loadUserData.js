@@ -18,7 +18,6 @@ export async function loadProfileData(userId) {
     throw new Error("Network response was not ok");
   }
   const data = await response.json();
-  await updateProfileSection(data);
   return data;
 }
 
@@ -102,8 +101,9 @@ export function changeDate(date) {
   return dateRaw.substr(0, 10);
 }
 
+// 받아온 데이터를 화면에 넣어주기 (중복사용x)
 function updateProfileSection(data) {
-  document.getElementById("profileImage").src = "../images/profile.png";
+  // document.getElementById("profileImage").src = "../images/profile.png"; //png 에러 원인
   // data.profileImage  ? data.profileImage : "https://cataas.com/cat";
   document.getElementById("nameText").innerText = data.name || "이름 없음";
   document.getElementById("emailText").innerText = data.email || "이메일 없음";

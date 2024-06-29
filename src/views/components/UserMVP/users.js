@@ -1,6 +1,7 @@
 import { fetchPostLogout } from "./logout.js";
 import { fetchGetInfo } from "../apiRequest.js";
 // 새 코드
+
 document.addEventListener("DOMContentLoaded", async function () {
   const userCardsContainer = document.getElementById("userCards");
 
@@ -20,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     card.innerHTML = `
             <div class="card">
-                <img src="${user.imageUrl}" onerror="this.src='./images/profile.png';" class="card-img-top" alt="${user.name}">
+                <img src="${user.imageUrl}" class="card-img-top" alt="${user.name}" onerror="this.src='./images/profile.png';">
                 <div class="card-body">
                     <h5 class="card-title">${user.name}</h5>
                     <p class="card-text">${user.email}</p>
